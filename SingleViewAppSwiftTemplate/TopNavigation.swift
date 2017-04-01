@@ -8,23 +8,28 @@
 
 import UIKit
 
-struct EntrantNavigationStackView {
+struct TopNavigation {
     
-    enum EntrantNavButton: String {
-        case Guest
-        case Employee
-        case Manager
-        case Vendor
+    let guestButton: UIButton
+    let employeeButton: UIButton
+    let managerButton: UIButton
+    let vendorButton: UIButton
+    
+    enum TopNavButton {
+        case Guest(UIButton)
+        case Employee(UIButton)
+        case Manager(UIButton)
+        case Vendor(UIButton)
     }
     
     let topLevelNavStackView = UIStackView()
     
     init() {
         
-        let guestButton = entrantButton(withTitle: "Guest")
-        let employeeButton = entrantButton(withTitle: "Employee")
-        let managerButton = entrantButton(withTitle: "Manager")
-        let vendorButton = entrantButton(withTitle: "Vendor")
+        guestButton = entrantButton(withTitle: "Guest")
+        employeeButton = entrantButton(withTitle: "Employee")
+        managerButton = entrantButton(withTitle: "Manager")
+        vendorButton = entrantButton(withTitle: "Vendor")
         
         topLevelNavStackView.addArrangedSubview(guestButton)
         topLevelNavStackView.addArrangedSubview(employeeButton)

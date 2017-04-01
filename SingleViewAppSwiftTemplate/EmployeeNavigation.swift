@@ -13,6 +13,12 @@ struct EmployeeNavigation {
     let employeeNavStackView = UIStackView()
     let employee = Entrant.EmployeeType.self
     
+//    enum EmployeeNavButton: String {
+//        case foodService = "Food Service"
+//        case rideService = "Ride Service"
+//        case maintenence = "Mainten"
+//    }
+    
     init() {
         
         let rideServiceWorkerButton = entrantButton(withTitle: employee.rideService.rawValue)

@@ -8,10 +8,16 @@
 
 import UIKit
 
-struct GuestEntrantNavigationStackView {
+struct GuestNavigation {
     
     let guestEntrantNavStackView = UIStackView()
     
+//    enum GuestNavButton: String {
+//        case Child
+//        case Adult
+//        case Senior
+//        case VIP
+//    }
     
     init() {
         

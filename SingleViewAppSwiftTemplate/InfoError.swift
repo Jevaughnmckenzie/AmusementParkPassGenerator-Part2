@@ -11,6 +11,8 @@ enum InfoError: Error {
     case invalidBirthday(inObject: String, description: String)
     case invalidInfo(inObject: String, description: String)
     case nonspecificKiosk(description: String)
+    case invalidButton(description: String)
+    case navButtonIssue(description: String)
 }
 
 
