@@ -10,7 +10,7 @@ import UIKit
 
 struct GuestNavigation {
     
-    let guestEntrantNavStackView = UIStackView()
+    let guestNavStackView = UIStackView()
     
 //    enum GuestNavButton: String {
 //        case Child
@@ -26,15 +26,15 @@ struct GuestNavigation {
         let seniorButton = entrantButton(withTitle: Entrant.GuestType.senior.rawValue)
         let vipButton = entrantButton(withTitle: Entrant.GuestType.vip.rawValue)
         
-        guestEntrantNavStackView.addArrangedSubview(childButton)
-        guestEntrantNavStackView.addArrangedSubview(adultButton)
-        guestEntrantNavStackView.addArrangedSubview(seniorButton)
-        guestEntrantNavStackView.addArrangedSubview(vipButton)
+        guestNavStackView.addArrangedSubview(childButton)
+        guestNavStackView.addArrangedSubview(adultButton)
+        guestNavStackView.addArrangedSubview(seniorButton)
+        guestNavStackView.addArrangedSubview(vipButton)
         
-        guestEntrantNavStackView.axis = .horizontal
-        guestEntrantNavStackView.alignment = .fill
-        guestEntrantNavStackView.distribution = .fillEqually
-        guestEntrantNavStackView.spacing = 0
+        guestNavStackView.axis = .horizontal
+        guestNavStackView.alignment = .fill
+        guestNavStackView.distribution = .fillEqually
+        guestNavStackView.spacing = 0
     }
     
     func entrantButton(withTitle title: String) -> UIButton {

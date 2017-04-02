@@ -11,18 +11,28 @@ import UIKit
 class ViewController: UIViewController {
     
     let topNav = TopNavigation()
-    let secondStack = SecondLevelNavigationView().secondStack
+    let secondNavView = SecondLevelNavigationView().secondStack
+    let guestNav = GuestNavigation()
+    let employeeNav = EmployeeNavigation()
+    let managerNav = ManagerNavigation()
+    let vendorNav = VendorNavigation()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(topNav.topLevelNavStackView)
-        secondStack.backgroundColor = UIColor(red: 46/255.0, green: 13/255.0, blue: 57/255.0, alpha: 1)
-        view.addSubview(secondStack)
+        secondNavView.backgroundColor = UIColor(red: 46/255.0, green: 13/255.0, blue: 57/255.0, alpha: 1)
+        view.addSubview(secondNavView)
+//        view.addSubview(guestNav.guestNavStackView)
         
-        addSecondLevelNavStackViews()
+        
+        topNav.guestButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
+        topNav.employeeButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
+        topNav.managerButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
+        topNav.vendorButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
     }
+    
     
     /*
      
@@ -36,6 +46,7 @@ class ViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         setupTopLevelNavStackView()
         setupSecondLevelNavStackView()
+        addSecondLevelNavStackViews()
     }
     
     func setupTopLevelNavStackView() {
@@ -53,81 +64,131 @@ class ViewController: UIViewController {
     
     func setupSecondLevelNavStackView() {
         
-        secondStack.translatesAutoresizingMaskIntoConstraints = false
+        secondNavView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            secondStack.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
-            secondStack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            secondStack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            secondStack.heightAnchor.constraint(equalToConstant: 60)
+            secondNavView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+            secondNavView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            secondNavView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            secondNavView.heightAnchor.constraint(equalToConstant: 60)
             ])
 
     }
     
     func addSecondLevelNavStackViews() {
-        secondStack.addSubview(GuestNavigation().guestEntrantNavStackView)
-        secondStack.addSubview(EmployeeNavigation().employeeNavStackView)
-        secondStack.addSubview(ManagerNavigation().managerNavStackview)
-        secondStack.addSubview(VendorNavigation().vendorNavStackview)
+        secondNavView.addSubview(guestNav.guestNavStackView)
+        secondNavView.addSubview(employeeNav.employeeNavStackView)
+        secondNavView.addSubview(managerNav.managerNavStackview)
+        secondNavView.addSubview(vendorNav.vendorNavStackview)
         
-        for subview in secondStack.subviews {
+        guestNav.guestNavStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            guestNav.guestNavStackView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+            guestNav.guestNavStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            guestNav.guestNavStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            guestNav.guestNavStackView.heightAnchor.constraint(equalToConstant: 60)
+            ])
+        
+        employeeNav.employeeNavStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            employeeNav.employeeNavStackView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+            employeeNav.employeeNavStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            employeeNav.employeeNavStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            employeeNav.employeeNavStackView.heightAnchor.constraint(equalToConstant: 60)
+            ])
+        
+        managerNav.managerNavStackview.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            managerNav.managerNavStackview.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+            managerNav.managerNavStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            managerNav.managerNavStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            managerNav.managerNavStackview.heightAnchor.constraint(equalToConstant: 60)
+            ])
+        
+        vendorNav.vendorNavStackview.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            vendorNav.vendorNavStackview.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+            vendorNav.vendorNavStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            vendorNav.vendorNavStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            vendorNav.vendorNavStackview.heightAnchor.constraint(equalToConstant: 60)
+            ])
+        
+        for subview in secondNavView.subviews {
             subview.isHidden = true
         }
     }
     
-    func displaySecondLevelNav() {
-        /*
-         secondView.subviews button indexes:
-            0: Guest
-            1: Employee
-            2: Manager
-            3: Vendor
-         */
+    
+//    func displaySecondLevelNav() {
+//        for subview in secondNavView.subviews {
+//            subview.isHidden = true
+//        }
+//        print("Fuction ran")
+//        let topNavButtons = TopNavigation().topLevelNavStackView.arrangedSubviews as! [UIButton]
+//        for navButton in topNavButtons {
+//            print("Loop Excecuted")
+//            print(navButton.currentTitle)
+//            switch navButton  {
+//            case topNav.guestButton:
+//                print("correct case chosen")
+//    //
+//            case topNav.employeeButton:
+//                
+//            case topNav.managerButton:
+//               
+//            case topNav.vendorButton:
+//                
+//            default:
+//                print("Fell through to the default")
+//    //                InfoError.invalidButton(description: "No such button should exist.")
+//            }
+//        }
+//    }
+    
+    func changeSubNav(forEntrant entrant: UIButton) {
+        let navButtonCatalog = [
+            "Guest" : guestNav.guestNavStackView,
+            "Employee" : employeeNav.employeeNavStackView,
+            "Manager" : managerNav.managerNavStackview,
+            "Vendor" : vendorNav.vendorNavStackview
+        ]
         
-        for subview in secondStack.subviews {
+        for subview in secondNavView.subviews {
             subview.isHidden = true
         }
         
-        let topNavButtons = TopNavigation().topLevelNavStackView.arrangedSubviews as! [UIButton]
-        for navButton in topNavButtons {
-            switch navButton  {
-            case topNav.guestButton:
-                if let guestButtonIndex = secondStack.subviews.index(of: topNav.guestButton) {
-                    let guestNav = secondStack.subviews[guestButtonIndex]
-                    guestNav.isHidden = false
-                }
-//                else {
-//                    InfoError.navButtonIssue(description: "Guest Button returning nil.")
-//                }
-            case topNav.employeeButton:
-                if let employeeButtonIndex = secondStack.subviews.index(of: topNav.employeeButton) {
-                    let employeeNav = secondStack.subviews[employeeButtonIndex]
-                    employeeNav.isHidden = false
-                }
-//               else {
-//                  InfoError.navButtonIssue(description: "Employee Button returning nil.")
-//               }
-            case topNav.managerButton:
-                if let managerButtonIndex = secondStack.subviews.index(of: topNav.managerButton) {
-                    let managerNav = secondStack.subviews[managerButtonIndex]
-                    managerNav.isHidden = false
-                }
-//                else {
-//                    InfoError.navButtonIssue(description: "Manager Button returning nil.")
-//                }
-            case topNav.vendorButton:
-                if let vendorButtonIndex = secondStack.subviews.index(of: topNav.vendorButton) {
-                    let vendorNav = secondStack.subviews[vendorButtonIndex]
-                    vendorNav.isHidden = false
-                }
-//                else {
-//                    InfoError.navButtonIssue(description: "Vendor Button returning nil.")
-//                }
-            default:
-                InfoError.invalidButton(description: "No such button should exist.")
-            }
+        if let buttonTitle = entrant.currentTitle,
+            let subNavStackView = navButtonCatalog[buttonTitle],
+            let buttonIndex = secondNavView.subviews.index(of: subNavStackView) {
+            let subNav = secondNavView.subviews[buttonIndex]
+            subNav.isHidden = false
         }
     }
+    
+//    func changeSubNav() {
+//        let navButtonCatalog = [
+//            "Guest" : guestNav.guestNavStackView,
+//            "Employee" : employeeNav.employeeNavStackView,
+//            "Manager" : managerNav.managerNavStackview,
+//            "Vendor" : vendorNav.vendorNavStackview
+//        ]
+//        print("code ran")
+//        for subview in secondNavView.subviews {
+//            subview.isHidden = true
+//        }
+//        
+//        if let buttonTitle = topNav.guestButton.currentTitle,
+//            let subNavStackView = navButtonCatalog[buttonTitle],
+//            let buttonIndex = secondNavView.subviews.index(of: subNavStackView) {
+//            print("code went into desired block")
+//            print(buttonIndex)
+//            let subNav = secondNavView.subviews[buttonIndex] as! UIStackView
+//            subNav.isHidden = false
+//        }
+//        
+//    }
+    
+    
 }
 
 

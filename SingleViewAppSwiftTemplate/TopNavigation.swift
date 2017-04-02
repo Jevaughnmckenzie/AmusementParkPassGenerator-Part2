@@ -26,10 +26,20 @@ struct TopNavigation {
     
     init() {
         
-        guestButton = entrantButton(withTitle: "Guest")
-        employeeButton = entrantButton(withTitle: "Employee")
-        managerButton = entrantButton(withTitle: "Manager")
-        vendorButton = entrantButton(withTitle: "Vendor")
+        func entrantButton(withTitle title: String) -> UIButton {
+            let newButton = UIButton(type: .system)
+            newButton.setTitle(title, for: .normal)
+            newButton.setTitleColor(UIColor.white, for: .normal)
+            newButton.backgroundColor = UIColor(red: 64/255.0, green: 0, blue: 128/255.0, alpha: 0.57)
+            
+            
+            return newButton
+        }
+        
+        self.guestButton = entrantButton(withTitle: "Guest")
+        self.employeeButton = entrantButton(withTitle: "Employee")
+        self.managerButton = entrantButton(withTitle: "Manager")
+        self.vendorButton = entrantButton(withTitle: "Vendor")
         
         topLevelNavStackView.addArrangedSubview(guestButton)
         topLevelNavStackView.addArrangedSubview(employeeButton)
@@ -49,15 +59,7 @@ struct TopNavigation {
         
     }
     
-    func entrantButton(withTitle title: String) -> UIButton {
-        let newButton = UIButton(type: .system)
-        newButton.setTitle(title, for: .normal)
-        newButton.setTitleColor(UIColor.white, for: .normal)
-        newButton.backgroundColor = UIColor(red: 64/255.0, green: 0, blue: 128/255.0, alpha: 0.57)
-
-
-        return newButton
-    }
+    
     
     func createButtons() {
         

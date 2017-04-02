@@ -24,10 +24,17 @@ struct EmployeeNavigation {
         let rideServiceWorkerButton = entrantButton(withTitle: employee.rideService.rawValue)
         let foodServiceWorkerButton = entrantButton(withTitle: employee.foodService.rawValue)
         let maintenanceWorkerButton = entrantButton(withTitle: employee.maintenance.rawValue)
+        let contractWorkerButton = entrantButton(withTitle: employee.contract.rawValue)
         
         employeeNavStackView.addArrangedSubview(rideServiceWorkerButton)
         employeeNavStackView.addArrangedSubview(foodServiceWorkerButton)
         employeeNavStackView.addArrangedSubview(maintenanceWorkerButton)
+        employeeNavStackView.addArrangedSubview(contractWorkerButton)
+        
+        employeeNavStackView.axis = .horizontal
+        employeeNavStackView.alignment = .fill
+        employeeNavStackView.distribution = .fillEqually
+        employeeNavStackView.spacing = 0
     }
     
     func entrantButton(withTitle title: String) -> UIButton {

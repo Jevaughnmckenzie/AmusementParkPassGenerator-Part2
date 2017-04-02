@@ -14,7 +14,7 @@
 		3A8AADDE1DF9B85E00A2B931 /* SingleViewAppSwiftTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADDD1DF9B85E00A2B931 /* SingleViewAppSwiftTemplateTests.swift */; };
 		3A8AADE91DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADE81DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift */; };
 		A835F2161E8E9B1100E3A659 /* AccessPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A835F2151E8E9B1100E3A659 /* AccessPermission.swift */; };
-		A835F2181E8E9BA500E3A659 /* EntrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A835F2171E8E9BA500E3A659 /* EntrantType.swift */; };
+		A835F2181E8E9BA500E3A659 /* Entrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A835F2171E8E9BA500E3A659 /* Entrant.swift */; };
 		A835F21E1E8E9F6C00E3A659 /* AreaAccessKiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A835F21D1E8E9F6C00E3A659 /* AreaAccessKiosk.swift */; };
 		A835F2201E8EA04D00E3A659 /* RideAccessKiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A835F21F1E8EA04D00E3A659 /* RideAccessKiosk.swift */; };
 		A835F2221E8EA1C500E3A659 /* VendorStallKiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = A835F2211E8EA1C500E3A659 /* VendorStallKiosk.swift */; };
@@ -63,7 +63,7 @@
 		3A8AADE81DF9B85E00A2B931 /* SingleViewAppSwiftTemplateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleViewAppSwiftTemplateUITests.swift; sourceTree = "<group>"; };
 		3A8AADEA1DF9B85E00A2B931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A835F2151E8E9B1100E3A659 /* AccessPermission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessPermission.swift; sourceTree = "<group>"; };
-		A835F2171E8E9BA500E3A659 /* EntrantType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantType.swift; sourceTree = "<group>"; };
+		A835F2171E8E9BA500E3A659 /* Entrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entrant.swift; sourceTree = "<group>"; };
 		A835F21D1E8E9F6C00E3A659 /* AreaAccessKiosk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AreaAccessKiosk.swift; sourceTree = "<group>"; };
 		A835F21F1E8EA04D00E3A659 /* RideAccessKiosk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideAccessKiosk.swift; sourceTree = "<group>"; };
 		A835F2211E8EA1C500E3A659 /* VendorStallKiosk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorStallKiosk.swift; sourceTree = "<group>"; };
@@ -136,15 +136,15 @@
 				A835F2231E8EA6BC00E3A659 /* TopNavigation.swift */,
 				A86EC2F71E8ED0BD003B5B57 /* SecondLevelNavigationView.swift */,
 				A86EC2EF1E8EBFEA003B5B57 /* GuestNavigation.swift */,
+				A86EC2F11E8EC14E003B5B57 /* EmployeeNavigation.swift */,
 				A86EC2F31E8EC2C8003B5B57 /* ManagerNavigation.swift */,
 				A86EC2F51E8EC2DE003B5B57 /* VendorNavigation.swift */,
-				A86EC2F11E8EC14E003B5B57 /* EmployeeNavigation.swift */,
 				3A8AADCF1DF9B85E00A2B931 /* Assets.xcassets */,
 				3A8AADD11DF9B85E00A2B931 /* LaunchScreen.storyboard */,
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
 				A8409A351E7843080019DEAB /* EnrantInfo.swift */,
 				A8409A391E78437E0019DEAB /* InfoError.swift */,
-				A835F2171E8E9BA500E3A659 /* EntrantType.swift */,
+				A835F2171E8E9BA500E3A659 /* Entrant.swift */,
 				A835F2151E8E9B1100E3A659 /* AccessPermission.swift */,
 				A8409A311E7842DA0019DEAB /* Kiosk.swift */,
 				A835F21D1E8E9F6C00E3A659 /* AreaAccessKiosk.swift */,
@@ -323,7 +323,7 @@
 				A8409A3C1E7845AF0019DEAB /* ViewController.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
 				A86EC2F41E8EC2C8003B5B57 /* ManagerNavigation.swift in Sources */,
-				A835F2181E8E9BA500E3A659 /* EntrantType.swift in Sources */,
+				A835F2181E8E9BA500E3A659 /* Entrant.swift in Sources */,
 				A8409A321E7842DA0019DEAB /* Kiosk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -138,12 +138,13 @@ struct Pass {
                 default:
                     throw InfoError.invalidInfo(inObject: personalInfo.description, description: "The project number entered is invalid.")
                 }
-            case .manager :
-                return [.areaAccess(.amusement), .areaAccess(.kitchen), .areaAccess(.rideControl),
-                        .areaAccess(.maintenance), .areaAccess(.office), .rideAccess(.allRides),
-                        .ridePriority(.standard), .discountAccess(.food, 25), .discountAccess(.merchandise, 25)]
             }
-            
+        case .manager :
+            return [.areaAccess(.amusement), .areaAccess(.kitchen), .areaAccess(.rideControl),
+                    .areaAccess(.maintenance), .areaAccess(.office), .rideAccess(.allRides),
+                    .ridePriority(.standard), .discountAccess(.food, 25), .discountAccess(.merchandise, 25)]
+        
+        
         case .vendor(let vendorType):
             switch vendorType {
             case .acme:
