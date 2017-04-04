@@ -81,6 +81,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
         makeStackViewHorizontal([sectionOneStack,sectionTwoStack,sectionThreeStack,sectionFourStack,sectionFiveStack,sectionSixStack])
+        formatEntrantFormStackView(entrantFormStack)
         
         entrantFormSubviews = [
             topNav.topLevelNavStackView,
@@ -88,12 +89,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             entrantFormStack
         ]
         
-        stackViewFormattingFor([buttonsStack, entrantFormStack,sectionOneStack,sectionTwoStack,sectionThreeStack,sectionFourStack,sectionFiveStack,sectionSixStack])
+        subStackViewFormattingFor([buttonsStack,sectionOneStack,sectionTwoStack,sectionThreeStack,sectionFourStack,sectionFiveStack,sectionSixStack])
         
         addToMasterView(entrantFormSubviews)
         turnOffAutoResizingMaskForElements(in: entrantFormSubviews)
         
         secondNavView.backgroundColor = UIColor(red: 46/255.0, green: 13/255.0, blue: 57/255.0, alpha: 1)
+        
+        view.backgroundColor = UIColor(red: 80/255.0, green: 40/255.0, blue: 111/255.0, alpha: 0.5)
         
         
 
@@ -132,6 +135,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             "zipcodeLabel" : zipcodeLabel,
             "generatePassButton" : generatePassButton,
             "populateDataButton" : populateDataButton,
+            "sectionOneStack" : sectionOneStack,
+            "sectionTwoStack" : sectionTwoStack,
+            "sectionThreeStack" : sectionThreeStack,
+            "sectionFourStack" : sectionFourStack,
+            "sectionFiveStack" : sectionSixStack,
             "entrantFormStack" : entrantFormStack
         ]
         
@@ -147,6 +155,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // First Column
 //        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[secondNavView]-[dobLabel]-[firstNameLabel]-[companyLabel]-[streetAddressLabel]-[cityLabel]-[generatePassButton]", options: [.alignAllLeading, .alignAllCenterX], metrics: nil, views: views))
+        
+        for subview in entrantFormStack.arrangedSubviews {
+            
+            NSLayoutConstraint.activate([
+                subview.leadingAnchor.constraint(equalTo: entrantFormStack.leadingAnchor, constant: 20),
+                subview.trailingAnchor.constraint(equalTo: entrantFormStack.trailingAnchor, constant: -20)
+                ])
+//            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[entrantFormStack]-textFieldToTextFeild-[\(subview)]-textFieldToTextFeild-[entrantFormStack]", options: [], metrics: metrics, views: views))
+        }
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[secondNavView]-subNavToEntrantForm-[entrantFormStack]-bottomSpaceOffset-|", options: [], metrics: metrics, views: views))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-entrantFormToSuperView-[entrantFormStack]-entrantFormToSuperView-|", options: [], metrics: metrics, views: views))
@@ -287,10 +304,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func createEntrantFormStackViews() {
-        
-    }
-    
     func createSubNavConstraintsFor(_ stackView: UIStackView) -> [NSLayoutConstraint] {
         return [stackView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -310,11 +323,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func stackViewFormattingFor(_ stacks: [UIStackView]) {
+    func subStackViewFormattingFor(_ stacks: [UIStackView]) {
         for stack in stacks {
             stack.distribution = .fillEqually
             stack.alignment = .leading
             stack.spacing = 20
+            
+        }
+    }
+    
+    func formatEntrantFormStackView(_ stack: UIStackView) {
+        stack.distribution = .fillEqually
+        stack.alignment = .center
+        stack.spacing = 50
+        
+        
+    }
+    
+    func formatEntrantFormTextfeilds(_ textFeilds: [UITextField]) {
+        for textFeild in textFeilds {
+            NSLayoutConstraint.activate([textFeild.heightAnchor.constraint(equalToConstant: 60)])
+            textFeild.borderStyle = .roundedRect
+            textFeild.backgroundColor = UIColor.gray
+            
         }
     }
     
