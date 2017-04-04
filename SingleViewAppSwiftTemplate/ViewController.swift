@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     let topNav = TopNavigation()
     let secondNavView = SecondLevelNavigationView().secondStack
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     let firstNameTextFeild = UITextField()
     let lastNameTextFeild = UITextField()
     let companyTextFeild = UITextField()
-    let StreetAddressTextFeild = UITextField()
+    let streetAddressTextFeild = UITextField()
     let cityTextFeild = UITextField()
     let stateTextFeild = UITextField()
     let zipcodeTextFeild = UITextField()
@@ -43,48 +43,79 @@ class ViewController: UIViewController {
     let generatePassButton = UIButton()
     let populateDataButton = UIButton()
     
+    var entrantFormSubviews: Array<UIView> = []
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.addSubview(topNav.topLevelNavStackView)
+        
+        let dobStack = UIStackView(arrangedSubviews: [dobLabel, dobTextFeild])
+        let ssnStack = UIStackView(arrangedSubviews: [ssnLabel, ssnTextFeild])
+        let projectNumStack = UIStackView(arrangedSubviews: [projectNumLabel, projectNumTextFeild])
+        let firstNameStack = UIStackView(arrangedSubviews: [firstNameLabel, firstNameTextFeild])
+        let lastNameStack = UIStackView(arrangedSubviews: [lastNameLabel, lastNameTextFeild])
+        let companyStack = UIStackView(arrangedSubviews: [companyLabel, companyTextFeild])
+        let streetAddressStack = UIStackView(arrangedSubviews: [streetAddressLabel, streetAddressTextFeild])
+        let cityStack = UIStackView(arrangedSubviews: [cityLabel, cityTextFeild])
+        let stateStack = UIStackView(arrangedSubviews: [stateLabel, stateTextFeild])
+        let zipcodeStack = UIStackView(arrangedSubviews: [zipcodeLabel, zipcodeTextFeild])
+        let buttonsStack = UIStackView(arrangedSubviews: [generatePassButton, populateDataButton])
+        
+        let sectionOneStack = UIStackView(arrangedSubviews: [dobStack, ssnStack, projectNumStack])
+        let sectionTwoStack = UIStackView(arrangedSubviews: [firstNameStack, lastNameStack])
+        let sectionThreeStack = UIStackView(arrangedSubviews: [companyStack])
+        let sectionFourStack = UIStackView(arrangedSubviews: [streetAddressStack])
+        let sectionFiveStack = UIStackView(arrangedSubviews: [cityStack, stateStack, zipcodeStack])
+        let sectionSixStack = UIStackView(arrangedSubviews: [buttonsStack])
+        
+        let entrantFormStack = UIStackView(arrangedSubviews: [sectionOneStack,
+                                                              sectionTwoStack,
+                                                              sectionThreeStack,
+                                                              sectionFourStack,
+                                                              sectionFiveStack,
+                                                              sectionSixStack])
+        
+        makeStackViewVertical([dobStack, ssnStack, projectNumStack, firstNameStack, lastNameStack, companyStack,streetAddressStack,cityStack,stateStack, zipcodeStack, entrantFormStack])
+        
+        
+        makeStackViewHorizontal([sectionOneStack,sectionTwoStack,sectionThreeStack,sectionFourStack,sectionFiveStack,sectionSixStack])
+        
+        entrantFormSubviews = [
+            topNav.topLevelNavStackView,
+            secondNavView,
+            entrantFormStack
+        ]
+        
+        stackViewFormattingFor([buttonsStack, entrantFormStack,sectionOneStack,sectionTwoStack,sectionThreeStack,sectionFourStack,sectionFiveStack,sectionSixStack])
+        
+        addToMasterView(entrantFormSubviews)
+        turnOffAutoResizingMaskForElements(in: entrantFormSubviews)
+        
         secondNavView.backgroundColor = UIColor(red: 46/255.0, green: 13/255.0, blue: 57/255.0, alpha: 1)
-        view.addSubview(secondNavView)
         
-//        view.addSubview(wrapper)
         
-//        print(wrapper.frame)
-//        entrantForm.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//
-//        
-//        view.addSubview(entrantForm)
+
         
 //        ************ Visual format layout practice *********************
         
-        dobLabel.translatesAutoresizingMaskIntoConstraints = false
-        firstNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        companyLabel.translatesAutoresizingMaskIntoConstraints = false
-        streetAddressLabel.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        generatePassButton.translatesAutoresizingMaskIntoConstraints = false
         
         dobLabel.text = "DOB"
+        ssnLabel.text = "SSN"
+        projectNumLabel.text = "Project #"
         firstNameLabel.text = "First Name"
+        lastNameLabel.text = "Last Name"
         companyLabel.text = "Company"
         streetAddressLabel.text = "Street Address"
         cityLabel.text = "City"
+        stateLabel.text = "State"
+        zipcodeLabel.text = "Zipcode"
         generatePassButton.setTitle("Generate Pass", for: .normal)
+        populateDataButton.setTitle("Populate Data", for: .normal)
         
         generatePassButton.backgroundColor = UIColor.green
-        
-        view.addSubview(dobLabel)
-        view.addSubview(firstNameLabel)
-        view.addSubview(companyLabel)
-        view.addSubview(streetAddressLabel)
-        view.addSubview(cityLabel)
-        view.addSubview(generatePassButton)
+        populateDataButton.backgroundColor = UIColor.lightGray
         
         
         let views: [String : AnyObject] = [
@@ -100,22 +131,25 @@ class ViewController: UIViewController {
             "stateLabel" : stateLabel,
             "zipcodeLabel" : zipcodeLabel,
             "generatePassButton" : generatePassButton,
-            "populateDataButton" : populateDataButton
+            "populateDataButton" : populateDataButton,
+            "entrantFormStack" : entrantFormStack
         ]
         
         let metrics: [String : AnyObject] = [
+            "subNavToEntrantForm" : 30 as AnyObject,
+            "entrantFormToSuperView" : 0 as AnyObject,
             "labelToTextField" : 10 as AnyObject,
             "textFieldToTextFeild" : 20 as AnyObject,
             "textFeildToLabel" : 30 as AnyObject,
             "bottomSpaceOffset" : 50 as AnyObject
         ]
         
-        let options: [NSLayoutFormatOptions] = [
-            
-        ]
         
         // First Column
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[secondNavView]-[dobLabel]-[firstNameLabel]-[companyLabel]-[streetAddressLabel]-[cityLabel]-[generatePassButton]", options: [.alignAllLeading, .alignAllCenterX], metrics: nil, views: views))
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[secondNavView]-[dobLabel]-[firstNameLabel]-[companyLabel]-[streetAddressLabel]-[cityLabel]-[generatePassButton]", options: [.alignAllLeading, .alignAllCenterX], metrics: nil, views: views))
+        
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[secondNavView]-subNavToEntrantForm-[entrantFormStack]-bottomSpaceOffset-|", options: [], metrics: metrics, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-entrantFormToSuperView-[entrantFormStack]-entrantFormToSuperView-|", options: [], metrics: metrics, views: views))
         
 //        ****************************************************************
         
@@ -158,7 +192,6 @@ class ViewController: UIViewController {
             secondNavView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             secondNavView.heightAnchor.constraint(equalToConstant: 60)
             ])
-
     }
     
     func addSecondLevelNavStackViews() {
@@ -170,36 +203,16 @@ class ViewController: UIViewController {
         //FIXME: Repetative code
         
         guestNav.guestNavStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            guestNav.guestNavStackView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
-            guestNav.guestNavStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            guestNav.guestNavStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            guestNav.guestNavStackView.heightAnchor.constraint(equalToConstant: 60)
-            ])
+        NSLayoutConstraint.activate(createSubNavConstraintsFor(guestNav.guestNavStackView))
         
         employeeNav.employeeNavStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            employeeNav.employeeNavStackView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
-            employeeNav.employeeNavStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            employeeNav.employeeNavStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            employeeNav.employeeNavStackView.heightAnchor.constraint(equalToConstant: 60)
-            ])
+        NSLayoutConstraint.activate(createSubNavConstraintsFor(employeeNav.employeeNavStackView))
         
         managerNav.managerNavStackview.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            managerNav.managerNavStackview.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
-            managerNav.managerNavStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            managerNav.managerNavStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            managerNav.managerNavStackview.heightAnchor.constraint(equalToConstant: 60)
-            ])
+        NSLayoutConstraint.activate(createSubNavConstraintsFor(managerNav.managerNavStackview))
         
         vendorNav.vendorNavStackview.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            vendorNav.vendorNavStackview.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
-            vendorNav.vendorNavStackview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            vendorNav.vendorNavStackview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            vendorNav.vendorNavStackview.heightAnchor.constraint(equalToConstant: 60)
-            ])
+        NSLayoutConstraint.activate(createSubNavConstraintsFor(vendorNav.vendorNavStackview))
         
         for subview in secondNavView.subviews {
             subview.isHidden = true
@@ -252,18 +265,58 @@ class ViewController: UIViewController {
         }
     }
     
-    func entrantFormDimensions()  {
-        
-    }
+    /*
+     
+     declutter viewcontroller:
+        reduce repetative code
+     create an array to hold all the on screen views
+     create a function that returns a stack view with a label and text field
+     
+     
+     */
     
     func turnOffAutoResizingMaskForElements<LayoutElement: UIView>(in array: [LayoutElement]) {
         for element in array {
             element.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-
     
+    func addToMasterView(_ subviews: [UIView]) {
+        for subview in subviews {
+            view.addSubview(subview)
+        }
+    }
     
+    func createEntrantFormStackViews() {
+        
+    }
+    
+    func createSubNavConstraintsFor(_ stackView: UIStackView) -> [NSLayoutConstraint] {
+        return [stackView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        stackView.heightAnchor.constraint(equalToConstant: 60)]
+    }
+    
+    func makeStackViewVertical(_ stacks: [UIStackView]) {
+        for stack in stacks{
+            stack.axis = .vertical
+        }
+    }
+    
+    func makeStackViewHorizontal(_ stacks: [UIStackView]) {
+        for stack in stacks {
+            stack.axis = .horizontal
+        }
+    }
+    
+    func stackViewFormattingFor(_ stacks: [UIStackView]) {
+        for stack in stacks {
+            stack.distribution = .fillEqually
+            stack.alignment = .leading
+            stack.spacing = 20
+        }
+    }
     
     
 }
