@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ProgramaticUIViewController: UIViewController, UITextFieldDelegate {
     
     let topNav = TopNavigation()
     let secondNavView = SecondLevelNavigationView().secondStack
