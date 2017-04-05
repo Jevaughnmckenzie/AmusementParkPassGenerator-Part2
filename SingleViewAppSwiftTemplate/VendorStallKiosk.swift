@@ -10,19 +10,13 @@ class VendorStallKiosk: Kiosk {
     
     let description = "VendorStallKiosk"
     
-    var discountBeingAuthorized: AccessPermission.Discount
-    
-    init(for discountBeingAuthorized: AccessPermission.Discount) {
-        self.discountBeingAuthorized = discountBeingAuthorized
-    }
-    
-    override func swipe(pass: Pass) {
+    func swipeFunction(authorizing authorization: AccessPermission.Discount) {
         var catagoricalPermissions = 0
         do {
             for permission in try pass.getAccessPrivileges() {
                 switch permission {
-                case .discountAccess(discountBeingAuthorized, let discountAmount) :
-                    switch discountBeingAuthorized {
+                case .discountAccess(authorization, let discountAmount) :
+                    switch authorization {
                     case .food, .merchandise:
                         print("Please provide discount of \(discountAmount).")
                         catagoricalPermissions += 1
@@ -35,7 +29,7 @@ class VendorStallKiosk: Kiosk {
             if catagoricalPermissions == 0 {
                 print("No discount")
             }
-            printBirthdayMessage(pass: pass)
+            printBirthdayMessage()
             
         }  catch InfoError.missingInformation(let object, let description) {
             print("Error in \(String(describing:object)): \(description)")

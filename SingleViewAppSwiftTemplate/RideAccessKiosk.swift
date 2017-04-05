@@ -9,37 +9,27 @@
 class RideAccessKiosk: Kiosk {
     
     let description = "RideAccessKiosk"
-    var rideBeingAuthorized: AccessPermission.RideAccess
     
-    init(for rideBeingAuthorized: AccessPermission.RideAccess) {
-        self.rideBeingAuthorized = rideBeingAuthorized
-    }
-    
-    override func swipe(pass: Pass) {
+    override func swipeFunction(authorizing authorization: AccessPermission) {
         do {
             for permission in try pass.getAccessPrivileges() {
-                switch permission {
-                case .rideAccess(rideBeingAuthorized) :
-                    switch rideBeingAuthorized {
-                    case .allRides:
+                    switch authorization {
+                    case .rideAccess(.allRides):
                         print("Ride access granted!")
                         
-                    case .noRides:
+                    case .rideAccess(.noRides):
                         print("Ride access denied.")
-                    }
-                case .ridePriority(let linePriority):
-                    switch linePriority {
-                    case .standard:
+                    case .ridePriority(.standard):
                         print("Please enter at the end of the line.")
-                    case .skipPrivilege:
+                    case .ridePriority(.skipPrivilege):
                         print("Please proceed to the end of the line.")
-                    }
-                default:
-                    continue
+                
+                    default:
+                        continue
                 }
             }
             
-            printBirthdayMessage(pass: pass)
+            printBirthdayMessage()
             
         }  catch InfoError.missingInformation(let object, let description) {
             print("Error in \(String(describing:object)): \(description)")

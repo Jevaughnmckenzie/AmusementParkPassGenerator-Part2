@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol EntrantPassDelegate {
+    
+}
+
+
+
 class MainViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var topNav: UIView!
@@ -22,35 +28,35 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ssnTextField: UITextField!
     @IBOutlet weak var projectNumTextField: UITextField!
     @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextFeild = UITextField()
-    @IBOutlet weak var companyTextFeild = UITextField()
-    @IBOutlet weak var streetAddressTextFeild = UITextField()
-    @IBOutlet weak var cityTextFeild = UITextField()
-    @IBOutlet weak var stateTextFeild = UITextField()
-    @IBOutlet weak var zipcodeTextFeild = UITextField()
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var streetAddressTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var stateTextField: UITextField!
+    @IBOutlet weak var zipcodeTextField: UITextField!
+    
+    var currentEntrantType: Entrant?
+
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let entrantButtons = TopNavigation(frame: topNav.frame)
-        topNav.addSubview(entrantButtons)
-        entrantButtons.translatesAutoresizingMaskIntoConstraints = false
+        dobTextField.delegate = self
+        ssnTextField.delegate = self
+        projectNumTextField.delegate = self
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        companyTextField.delegate = self
+        streetAddressTextField.delegate = self
+        cityTextField.delegate = self
+        stateTextField.delegate = self
+        zipcodeTextField.delegate = self
         
-        
-        NSLayoutConstraint.activate([
-            entrantButtons.topAnchor.constraint(equalTo: topNav.topAnchor),
-            entrantButtons.leadingAnchor.constraint(equalTo: topNav.leadingAnchor),
-            entrantButtons.trailingAnchor.constraint(equalTo: topNav.trailingAnchor),
-            entrantButtons.bottomAnchor.constraint(equalTo: topNav.bottomAnchor)
-            ])
-
-        
-        
-        entrantButtons.guestButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
-        entrantButtons.employeeButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
-        entrantButtons.managerButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
-        entrantButtons.vendorButton.addTarget(nil, action: #selector(changeSubNav), for: .touchUpInside)
+        createTextFieldTargetActionsFor(navButtons: guestNav.guestNavStackView.arrangedSubviews as! [UIButton])
+        createTextFieldTargetActionsFor(navButtons: employeeNav.employeeNavStackView.arrangedSubviews as! [UIButton])
+        createTextFieldTargetActionsFor(navButtons: managerNav.managerNavStackview.arrangedSubviews as! [UIButton])
+        createTextFieldTargetActionsFor(navButtons: vendorNav.vendorNavStackview.arrangedSubviews as! [UIButton])
         
     }
     
@@ -70,11 +76,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
      
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    
+   
 //    func setupTopLevelNavStackView() {
 //        
 //        entrantButtons.translatesAutoresizingMaskIntoConstraints = false
@@ -122,6 +124,26 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         ]
     }
     
+    @IBAction func changeSubNav(_ sender: UIButton) {
+        let navButtonCatalog = [
+            "Guest" : guestNav.guestNavStackView,
+            "Employee" : employeeNav.employeeNavStackView,
+            "Manager" : managerNav.managerNavStackview,
+            "Vendor" : vendorNav.vendorNavStackview
+        ]
+        
+        for subview in subNav.subviews {
+            subview.isHidden = true
+        }
+        
+        if let buttonTitle = sender.currentTitle,
+            let subNavStackView = navButtonCatalog[buttonTitle],
+            let subStackViewIndex = subNav.subviews.index(of: subNavStackView) {
+            subNav.subviews[subStackViewIndex].isHidden = false
+        }
+    }
+    
+    
     // MARK: Dynamic Sub Navigation
     func changeSubNav(forEntrant entrant: UIButton) {
         let navButtonCatalog = [
@@ -141,5 +163,88 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             subNav.subviews[subStackViewIndex].isHidden = false
         }
     }
+    
+    
+    
+    
+    func disableTextFields(_ textFields: [UITextField]) {
+        for textField in textFields {
+//            textField.text = ""
+            textField.isUserInteractionEnabled = false
+        }
+    }
+    
+    func enableTextFields(_ textFields: [UITextField]) {
+        for textField in textFields {
+//            textField.text = ""
+            textField.isUserInteractionEnabled = true
+        }
+    }
+    
+    func accessTextFields(_ sender: UIButton){
+        
+        if let button = sender.currentTitle {
+            //FIXME: Put i case for Manager subTypes
+            switch button {
+            case "Child", "Adult", "VIP", "Senior":
+                enableTextFields([dobTextField,firstNameTextField, lastNameTextField])
+                disableTextFields([ssnTextField,projectNumTextField,companyTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
+            case "Food Service", "Ride Service", "Maintenance":
+                enableTextFields([dobTextField,firstNameTextField, lastNameTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
+                disableTextFields([ssnTextField, projectNumTextField,companyTextField])
+            case "Contract" :
+                enableTextFields([dobTextField,projectNumTextField,firstNameTextField, lastNameTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
+                disableTextFields([ssnTextField,companyTextField])
+            case "Acme", "Orkin", "Fedex", "NW Electrical" :
+                enableTextFields([firstNameTextField, lastNameTextField, companyTextField,dobTextField])
+                disableTextFields([ssnTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
+            }
+            
+            currentEntrantType = determineEntrantType(sender)
+        }
+    }
+    
+    
+    func createTextFieldTargetActionsFor(navButtons buttons: [UIButton]) {
+        for button in buttons {
+            button.addTarget(self, action: #selector(accessTextFields(_:)), for: .touchUpInside)
+        }
+        
+        
+    }
+    
+    func determineEntrantType(_ sender: UIButton) -> Entrant? {
+        
+        if let entrant = sender.currentTitle{
+            switch entrant {
+            case "Child": return Entrant.guest(.child)
+            case "Adult" : return Entrant.guest(.regularGuest)
+            case "VIP" : return Entrant.guest(.vip)
+            case "Senior" : return Entrant.guest(.senior)
+            case "Food Service" : return Entrant.employee(.foodService)
+            case "Ride Service" : return Entrant.employee(.rideService)
+            case "Maintenance" : return Entrant.employee(.maintenance)
+            case "Contract" : return Entrant.employee(.contract)
+                //FIXME: Put i case for Manager subTypes
+            case "Acme" : return Entrant.vendor(.acme)
+            case "Orkin" : return Entrant.vendor(.orkin)
+            case "Fedex" : return Entrant.vendor(.fedex)
+            case "NW Electrical" : return Entrant.vendor(.nWElectrical)
+            default:
+                return Entrant.manager
+            }
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier = "generatePass" {
+            
+        }
+    }
+
+    
+    
+    
 
 }

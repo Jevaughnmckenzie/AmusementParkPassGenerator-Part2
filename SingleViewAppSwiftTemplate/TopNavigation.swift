@@ -23,7 +23,7 @@ class TopNavigation: UIStackView {
             newButton.setTitle(title, for: .normal)
             newButton.setTitleColor(UIColor.white, for: .normal)
             newButton.backgroundColor = UIColor(red: 64/255.0, green: 0, blue: 128/255.0, alpha: 0.57)
-            
+            newButton.translatesAutoresizingMaskIntoConstraints = false
             
             return newButton
         }
