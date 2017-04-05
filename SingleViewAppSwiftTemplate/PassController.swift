@@ -13,7 +13,7 @@ class PassController: UIViewController {
     var pass: Pass?
     weak var rideAccessKiosk: RideAccessKiosk!
     weak var areaAccessKiosk: AreaAccessKiosk!
-    weak var discountAccessKiosk: VendorStallKiosk!
+    weak var vendorStallKiosk: VendorStallKiosk!
     
     @IBOutlet weak var testResultsView: UIView!
     @IBOutlet weak var testResultsMessage: UILabel!
@@ -28,7 +28,7 @@ class PassController: UIViewController {
         
         rideAccessKiosk = RideAccessKiosk(pass: verifiedPass)
         areaAccessKiosk = AreaAccessKiosk(pass: verifiedPass)
-        discountAccessKiosk = VendorStallKiosk(pass: verifiedPass)
+        vendorStallKiosk = VendorStallKiosk(pass: verifiedPass)
     }
 
     
@@ -55,9 +55,31 @@ class PassController: UIViewController {
     }
     
     @IBAction func checkRidePermissions(_ sender: UIButton) {
+        
+        guard let button = sender.currentTitle else { return }
+        switch button {
+        case "Rides":
+            rideAccessKiosk.swipe(authorizing: .rideAccess(.allRides))
+            rideAccessKiosk.swipe(authorizing: .rideAccess(.noRides))
+            rideAccessKiosk.swipe(authorizing: .ridePriority(.skipPrivilege))
+            rideAccessKiosk.swipe(authorizing: .ridePriority(.standard))
+        default:
+            return
+        }
+        
     }
    
     @IBAction func checkDiscountPermissions(_ sender: UIButton) {
+        
+        guard let button = sender.currentTitle else { return }
+        switch button {
+        case "Food Discount":
+            vendorStallKiosk.swipe(authorizing: .discountAccess(.food, 5))
+            //FIXME: Add remaining code
+        default:
+            return
+        }
+        
     }
     
     

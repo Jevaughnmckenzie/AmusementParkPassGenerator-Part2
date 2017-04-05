@@ -35,7 +35,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var stateTextField: UITextField!
     @IBOutlet weak var zipcodeTextField: UITextField!
     
-    var currentEntrantType: Entrant?
+    var currentEntrantType: Entrant!
 
     
 
@@ -198,6 +198,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             case "Acme", "Orkin", "Fedex", "NW Electrical" :
                 enableTextFields([firstNameTextField, lastNameTextField, companyTextField,dobTextField])
                 disableTextFields([ssnTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
+            default:
+                print("Error inside the 'accessTextFields' fucntion")
             }
             
             currentEntrantType = determineEntrantType(sender)
@@ -213,7 +215,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func determineEntrantType(_ sender: UIButton) -> Entrant? {
+    func determineEntrantType(_ sender: UIButton) -> Entrant {
         
         if let entrant = sender.currentTitle{
             switch entrant {
@@ -234,12 +236,35 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                 return Entrant.manager
             }
         }
+        return Entrant.manager
     }
     
     
+    func createPass() throws -> Pass {
+        let entrantInfo = EntrantInfo(firstName: firstNameTextField.text,
+                                      lastName: lastNameTextField.text,
+                                      birthday: dobTextField.text,
+                                      streetAddress: streetAddressTextField.text,
+                                      city: cityTextField.text,
+                                      state: stateTextField.text,
+                                      zipcode: zipcodeTextField.text,
+                                      projectNumber: projectNumTextField.text,
+                                      company: companyTextField.text)
+        
+        let entrantType = currentEntrantType
+        
+        return Pass(entrant: entrantType!, personalInfo: entrantInfo)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier = "generatePass" {
+        if segue.identifier == "generatePass" {
             
+            do {
+                guard let passController = segue.destination as? PassController else { return }
+                passController.pass = try createPass()
+            } catch {
+                
+            }
         }
     }
 

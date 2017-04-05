@@ -10,13 +10,13 @@ class VendorStallKiosk: Kiosk {
     
     let description = "VendorStallKiosk"
     
-    func swipeFunction(authorizing authorization: AccessPermission.Discount) {
+    override func swipeFunction(authorizing authorization: AccessPermission) {
         var catagoricalPermissions = 0
         do {
             for permission in try pass.getAccessPrivileges() {
-                switch permission {
-                case .discountAccess(authorization, let discountAmount) :
-                    switch authorization {
+                switch authorization {
+                case .discountAccess(let discountType, let discountAmount) :
+                    switch discountType {
                     case .food, .merchandise:
                         print("Please provide discount of \(discountAmount).")
                         catagoricalPermissions += 1

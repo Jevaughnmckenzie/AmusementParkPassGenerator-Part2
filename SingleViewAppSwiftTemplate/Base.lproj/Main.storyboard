@@ -384,6 +384,7 @@
                         <outlet property="streetAddressTextField" destination="sxG-94-guB" id="Y1C-fB-WHF"/>
                         <outlet property="subNav" destination="A4S-DS-n8H" id="yeL-QF-8dN"/>
                         <outlet property="topNav" destination="vSk-7Z-98s" id="1MI-1H-Vy9"/>
+                        <outlet property="zipcodeTextField" destination="w8e-ee-ieG" id="L9L-0Z-7HW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
