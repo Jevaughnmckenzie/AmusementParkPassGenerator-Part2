@@ -305,14 +305,14 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vSk-7Z-98s">
                                 <rect key="frame" x="0.0" y="28" width="768" height="90"/>
-                                <color key="backgroundColor" red="0.3871733213232067" green="0.12162868614260944" blue="0.53666638934672783" alpha="0.56394477739726023" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="qrX-6Q-pC4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4S-DS-n8H">
                                 <rect key="frame" x="0.0" y="118" width="768" height="70"/>
-                                <color key="backgroundColor" red="0.11114109948673903" green="0.035451927518872148" blue="0.20196223410252989" alpha="0.59987692640000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="AbI-tS-oWV"/>
                                 </constraints>
@@ -333,8 +333,19 @@
                     </view>
                     <connections>
                         <outlet property="TopNav" destination="vSk-7Z-98s" id="XRY-tD-VyR"/>
+                        <outlet property="cityTextFeild" destination="sS6-JB-wbi" id="PT9-V5-LEZ"/>
+                        <outlet property="companyTextFeild" destination="0pD-y2-1eK" id="2mW-41-ZOw"/>
                         <outlet property="dobTextField" destination="eHB-ld-ZZg" id="Cao-VX-svu"/>
+                        <outlet property="firstNameTextField" destination="KDc-Ca-Kz3" id="eYv-uX-K66"/>
+                        <outlet property="lastNameTextFeild" destination="5iu-Q1-Kq9" id="eFO-mK-xjY"/>
+                        <outlet property="projectNumTextField" destination="wrY-OG-d8q" id="hZn-Pg-YIA"/>
+                        <outlet property="ssnTextField" destination="VO3-25-urE" id="OZm-ua-xBK"/>
+                        <outlet property="stateTextFeild" destination="NnV-ug-zZ3" id="gsD-ev-1Wf"/>
+                        <outlet property="streetAddressTextFeild" destination="sxG-94-guB" id="RPV-dl-R2y"/>
                         <outlet property="subNav" destination="A4S-DS-n8H" id="yeL-QF-8dN"/>
+                        <outlet property="topNav" destination="vSk-7Z-98s" id="1MI-1H-Vy9"/>
+                        <outlet property="zipcodeTextFeild" destination="w8e-ee-ieG" id="4rm-Ke-Ozs"/>
+                        <segue destination="TvN-Xk-18Y" kind="show" id="mW7-n8-mPI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

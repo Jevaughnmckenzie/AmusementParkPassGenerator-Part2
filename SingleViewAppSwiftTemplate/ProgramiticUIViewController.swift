@@ -84,7 +84,7 @@ class ProgramaticUIViewController: UIViewController, UITextFieldDelegate {
         formatEntrantFormStackView(entrantFormStack)
         
         entrantFormSubviews = [
-            topNav.topLevelNavStackView,
+            topNav,
             secondNavView,
             entrantFormStack
         ]
@@ -188,14 +188,14 @@ class ProgramaticUIViewController: UIViewController, UITextFieldDelegate {
     
     func setupTopLevelNavStackView() {
     
-        topNav.topLevelNavStackView.translatesAutoresizingMaskIntoConstraints = false
+        topNav.translatesAutoresizingMaskIntoConstraints = false
         
         
         NSLayoutConstraint.activate([
-            topNav.topLevelNavStackView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
-            topNav.topLevelNavStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topNav.topLevelNavStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topNav.topLevelNavStackView.heightAnchor.constraint(equalToConstant: 80)
+            topNav.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
+            topNav.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topNav.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topNav.heightAnchor.constraint(equalToConstant: 80)
             ])
     }
     
@@ -204,7 +204,7 @@ class ProgramaticUIViewController: UIViewController, UITextFieldDelegate {
         secondNavView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            secondNavView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+            secondNavView.topAnchor.constraint(equalTo: topNav.bottomAnchor),
             secondNavView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             secondNavView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             secondNavView.heightAnchor.constraint(equalToConstant: 60)
@@ -305,7 +305,7 @@ class ProgramaticUIViewController: UIViewController, UITextFieldDelegate {
     }
     
     func createSubNavConstraintsFor(_ stackView: UIStackView) -> [NSLayoutConstraint] {
-        return [stackView.topAnchor.constraint(equalTo: topNav.topLevelNavStackView.bottomAnchor),
+        return [stackView.topAnchor.constraint(equalTo: topNav.bottomAnchor),
         stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         stackView.heightAnchor.constraint(equalToConstant: 60)]

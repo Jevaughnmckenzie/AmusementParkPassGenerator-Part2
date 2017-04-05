@@ -8,23 +8,15 @@
 
 import UIKit
 
-struct TopNavigation {
+class TopNavigation: UIStackView {
     
     let guestButton: UIButton
     let employeeButton: UIButton
     let managerButton: UIButton
     let vendorButton: UIButton
     
-    enum TopNavButton {
-        case Guest(UIButton)
-        case Employee(UIButton)
-        case Manager(UIButton)
-        case Vendor(UIButton)
-    }
     
-    let topLevelNavStackView = UIStackView()
-    
-    init() {
+    override init(frame: CGRect) {
         
         func entrantButton(withTitle title: String) -> UIButton {
             let newButton = UIButton(type: .system)
@@ -41,33 +33,24 @@ struct TopNavigation {
         self.managerButton = entrantButton(withTitle: "Manager")
         self.vendorButton = entrantButton(withTitle: "Vendor")
         
-        topLevelNavStackView.addArrangedSubview(guestButton)
-        topLevelNavStackView.addArrangedSubview(employeeButton)
-        topLevelNavStackView.addArrangedSubview(managerButton)
-        topLevelNavStackView.addArrangedSubview(vendorButton)
         
-//        guestButton.addTarget(guestButton, action: <#T##Selector#>, for: <#T##UIControlEvents#>)
+        super.init(frame: frame)
         
-        topLevelNavStackView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(employeeButton)
+        self.addSubview(guestButton)
+        self.addSubview(managerButton)
+        self.addSubview(vendorButton)
         
-        topLevelNavStackView.axis = .horizontal
-        topLevelNavStackView.alignment = .fill
-        topLevelNavStackView.distribution = .fillEqually
-        topLevelNavStackView.spacing = 0
-//        topLevelNavStackView.backgroundColor = UIColor(red: 64/255.0, green: 0, blue: 128/255.0, alpha: 0.57)
-        
-        
+        self.distribution = .fillEqually
+        self.alignment = .fill
+        self.axis = .horizontal
+        self.spacing = 0
     }
     
-    
-    
-    func createButtons() {
-        
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func showSecondNavigation() {
-        
-    }
         
 }
     
