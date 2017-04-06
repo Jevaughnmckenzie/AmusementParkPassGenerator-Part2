@@ -354,10 +354,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                 let alertController = UIAlertController(title: "Invalid Information in \(object)", message: "\(description)", preferredStyle: .alert)
                 
                 alertController.addAction(action)
-            } catch InfoError.noEntrantChosen {
-                let alertController = UIAlertController(title: "Entrant Form Empty", message: "Please fill out all required information", preferredStyle: .alert)
-                
-                alertController.addAction(action)
             } catch {
                 fatalError()
             }

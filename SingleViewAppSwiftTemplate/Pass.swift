@@ -21,7 +21,7 @@ struct Pass {
     
     
     
-    func getAccessPrivileges() throws -> [AccessPermission] {
+    func getAccessPrivileges() -> [AccessPermission] {
         
                 
         
@@ -38,6 +38,8 @@ struct Pass {
             case .senior:
                 return [.areaAccess(.amusement), .rideAccess(.allRides), .ridePriority(.skipPrivilege),
                         .discountAccess(.food, 10), .discountAccess(.merchandise, 10)]
+            case .seasonPass:
+                return [.areaAccess(.amusement), .rideAccess(.allRides), .ridePriority(.skipPrivilege), .discountAccess(.food, 10), .discountAccess(.merchandise, 20)]
             }
             
         case .employee(let employeeType) :
@@ -74,7 +76,7 @@ struct Pass {
                     return
                         [.areaAccess(.kitchen), .areaAccess(.maintenance), .rideAccess(.noRides)]
                 default:
-                    throw InfoError.invalidInfo(inObject: personalInfo.description, description: "The project number entered is invalid.")
+                    return []
                 }
             }
         case .manager :

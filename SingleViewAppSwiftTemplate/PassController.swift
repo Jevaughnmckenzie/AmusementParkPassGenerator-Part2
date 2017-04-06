@@ -32,8 +32,7 @@ class PassController: UIViewController {
         areaAccessKiosk = AreaAccessKiosk(pass: pass)
         vendorStallKiosk = VendorStallKiosk(pass: pass)
         
-        entrantNameLabel.text = "\(pass.personalInfo.firstName) \(pass.personalInfo.lastName)"
-        entrantTypeLabel.text = "\(pass.entrant.type.rawValue)"
+        loadPassInfo()
     }
 
     
@@ -87,7 +86,73 @@ class PassController: UIViewController {
         
     }
     
-    
+    func loadPassInfo() {
+        // Name
+        if let firstName =  pass.personalInfo.firstName, let lastName = pass.personalInfo.lastName {
+            if firstName != "" && lastName != ""{
+                entrantNameLabel.text = "\(firstName) \(lastName)"
+            } else {
+                entrantNameLabel.text = "Guest"
+            }
+        }
+        // Pass Type
+        let entrant = pass.entrant
+        switch entrant {
+        case .guest(let guestType):
+            switch guestType {
+            case .regularGuest:
+                entrantTypeLabel.text = "Adult"
+            case .child :
+                entrantTypeLabel.text = "Child"
+            case .vip :
+                entrantTypeLabel.text = "VIP"
+            case .senior :
+                entrantTypeLabel.text = "Senior"
+            case .seasonPass :
+                entrantTypeLabel.text = "Season Pass"
+            }
+        case .employee(let employeeType):
+            switch employeeType {
+            case .foodService:
+                entrantTypeLabel.text = "Food Service Worker"
+            case .rideService:
+                entrantTypeLabel.text = "Ride Service Worker"
+            case .maintenance:
+                entrantTypeLabel.text = "Maintenance Worker"
+            case .contract:
+                entrantTypeLabel.text = "Contract Worker"
+            }
+        case .manager:
+            entrantTypeLabel.text = "Manager"
+        case .vendor(let vendor):
+            switch vendor {
+            case .acme:
+                entrantTypeLabel.text = "Acme"
+            case .fedex:
+                entrantTypeLabel.text = "Fedex"
+            case .orkin:
+                entrantTypeLabel.text = "Orkin"
+            case .nWElectrical:
+                entrantTypeLabel.text = "NW Electrical"
+            }
+        }
+        // Ride access
+        switch entrant {
+        case .employee(.contract), .vendor:
+            rideAccessPermissionLabel.text = "No Rides"
+        default:
+            rideAccessPermissionLabel.text = "Unlimited Rides"
+
+        }
+        // Food and Merch. Discounts
+        switch entrant {
+        case .guest(.regularGuest), .guest(.child), .employee(.contract), .vendor:
+            foodDiscountLabel.text = "No Food Discount"
+            merchendiseDiscountLabel.text = "No Merchendise Discount"
+        case .guest(.vip), .guest(.seasonPass):
+            foodDiscountLabel.text = ""
+        }
+    }
 
     
 
