@@ -35,35 +35,25 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var stateTextField: UITextField!
     @IBOutlet weak var zipcodeTextField: UITextField!
     
-    var currentEntrantType: Entrant!
+    var currentEntrantType: Entrant?
 
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dobTextField.delegate = self
-        ssnTextField.delegate = self
-        projectNumTextField.delegate = self
-        firstNameTextField.delegate = self
-        lastNameTextField.delegate = self
-        companyTextField.delegate = self
-        streetAddressTextField.delegate = self
-        cityTextField.delegate = self
-        stateTextField.delegate = self
-        zipcodeTextField.delegate = self
+        
+        
+        let allTextFields: [UITextField] = [dobTextField,ssnTextField,projectNumTextField,firstNameTextField,lastNameTextField,companyTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField]
+        
+        loadTextFieldsDisabled(allTextFields)
+        createTextFieldDelegatesFor(allTextFields)
         
         createTextFieldTargetActionsFor(navButtons: guestNav.guestNavStackView.arrangedSubviews as! [UIButton])
         createTextFieldTargetActionsFor(navButtons: employeeNav.employeeNavStackView.arrangedSubviews as! [UIButton])
         createTextFieldTargetActionsFor(navButtons: managerNav.managerNavStackview.arrangedSubviews as! [UIButton])
         createTextFieldTargetActionsFor(navButtons: vendorNav.vendorNavStackview.arrangedSubviews as! [UIButton])
         
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewWillLayoutSubviews() {
@@ -165,12 +155,26 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    //MARK: TextField Methods
     
+    func createTextFieldDelegatesFor(_ textFields: [UITextField]) {
+        for textField in textFields {
+            textField.delegate = self
+        }
+    }
+    
+    func loadTextFieldsDisabled(_ textFields: [UITextField]) {
+        for textField in textFields {
+            textField.backgroundColor = UIColor.lightGray
+            textField.isUserInteractionEnabled = false
+        }
+    }
     
     func disableTextFields(_ textFields: [UITextField]) {
         for textField in textFields {
 //            textField.text = ""
             textField.isUserInteractionEnabled = false
+            textField.backgroundColor = UIColor.lightGray
         }
     }
     
@@ -178,6 +182,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         for textField in textFields {
 //            textField.text = ""
             textField.isUserInteractionEnabled = true
+            textField.backgroundColor = UIColor.white
         }
     }
     
@@ -227,7 +232,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             case "Ride Service" : return Entrant.employee(.rideService)
             case "Maintenance" : return Entrant.employee(.maintenance)
             case "Contract" : return Entrant.employee(.contract)
-                //FIXME: Put i case for Manager subTypes
+                //FIXME: Put in case for Manager subTypes
             case "Acme" : return Entrant.vendor(.acme)
             case "Orkin" : return Entrant.vendor(.orkin)
             case "Fedex" : return Entrant.vendor(.fedex)
@@ -251,23 +256,117 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                                       projectNumber: projectNumTextField.text,
                                       company: companyTextField.text)
         
-        let entrantType = currentEntrantType
+        guard let entrantType = currentEntrantType else {
+            throw InfoError.noEntrantChosen
+        }
         
-        return Pass(entrant: entrantType!, personalInfo: entrantInfo)
+        // MARK: Entrant Information Error Handeling
+        switch entrantType {
+        case .employee(let employeeType):
+            guard entrantInfo.firstName != "" else {
+                throw InfoError.missingInformation(inObject: entrantInfo.description,
+                                                   description: "Please provide a First Name.")
+            }
+            
+            guard entrantInfo.lastName != "" else {
+                throw InfoError.missingInformation(inObject: entrantInfo.description,
+                                                   description: "Please provide a Last Name.")
+            }
+            
+            guard entrantInfo.streetAddress != "" else {
+                throw InfoError.missingInformation(inObject: entrantInfo.description,
+                                                   description: "Please provide a valid street address.")
+            }
+            
+            guard entrantInfo.city != "" else {
+                throw InfoError.missingInformation(inObject: entrantInfo.description,
+                                                   description: "Please provide a valid U.S. city.")
+            }
+            
+            guard entrantInfo.state != "" else {
+                throw InfoError.missingInformation(inObject: entrantInfo.description,
+                                                   description: "Please provide a valid U.S. state.")
+            }
+            
+            guard entrantInfo.zipcode != "", entrantInfo.zipcode?.characters.count == 5,
+                Int.init(entrantInfo.zipcode!) != nil  else {
+                    throw InfoError.missingInformation(inObject: entrantInfo.description,
+                                                       description: "Please provide a valid U.S. zipcode.")
+            }
+            
+            if employeeType == .contract {
+                guard let projectNumber = entrantInfo.projectNumber, Int(projectNumber) != nil else {
+                    throw InfoError.invalidInfo(inObject: entrantInfo.description,
+                                                description: "Please enter a valid project number.")
+                }
+            }
+            
+        case .guest(.child):
+            
+            let earliestValidBirthday =  Calendar.current.date(byAdding: .year, value: -5, to: Date())!
+            
+            guard entrantInfo.birthdayDate != nil else {
+                throw InfoError.missingInformation(inObject: entrantInfo.description,
+                                                   description: "Please provide a valid birthday.")
+            }
+            guard (entrantInfo.birthdayDate)! < Date() else {
+                throw InfoError.invalidBirthday(description: "Appearently, this individual has not been born yet.")
+            }
+            
+            guard (entrantInfo.birthdayDate)! >= earliestValidBirthday else {
+                throw InfoError.invalidBirthday(description: "This individual is too old to be entered as a Free Child.")
+            }
+            
+        default:
+            break
+        }
+
+        
+        return Pass(entrant: entrantType, personalInfo: entrantInfo)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
         if segue.identifier == "generatePass" {
             
             do {
                 guard let passController = segue.destination as? PassController else { return }
                 passController.pass = try createPass()
-            } catch {
                 
+            } catch InfoError.missingInformation(let object, let hint){
+                let alertController = UIAlertController(title: "Missing Information", message: "Error in \(object): \(hint)", preferredStyle: .alert)
+                
+                alertController.addAction(action)
+                
+                present(alertController, animated: true, completion: nil)
+                
+            } catch InfoError.noEntrantChosen {
+                let alertController = UIAlertController(title: "Missing Information", message: "Please choose an entrant and insert information.", preferredStyle: .alert)
+                
+                alertController.addAction(action)
+                present(alertController, animated: true, completion: nil)
+            } catch InfoError.invalidBirthday(let description){
+                let alertController = UIAlertController(title: "Invalid Birthday", message: "\(description)", preferredStyle: .alert)
+                
+                alertController.addAction(action)
+            } catch InfoError.invalidInfo(let object, let description) {
+                let alertController = UIAlertController(title: "Invalid Information in \(object)", message: "\(description)", preferredStyle: .alert)
+                
+                alertController.addAction(action)
+            } catch InfoError.noEntrantChosen {
+                let alertController = UIAlertController(title: "Entrant Form Empty", message: "Please fill out all required information", preferredStyle: .alert)
+                
+                alertController.addAction(action)
+            } catch {
+                fatalError()
             }
         }
     }
 
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//
+//    }
     
     
     

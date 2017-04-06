@@ -33,8 +33,8 @@ class RideAccessKiosk: Kiosk {
             
         }  catch InfoError.missingInformation(let object, let description) {
             print("Error in \(String(describing:object)): \(description)")
-        } catch InfoError.invalidBirthday(let object, let description) {
-            print("Invalid birthday set in \(String(describing:object)): \(description)")
+        } catch InfoError.invalidBirthday(let description) {
+            print("Invalid birthday: \(description)")
         } catch {
             print("Uncaught error in pass.getAccesspriveleges()")
         }

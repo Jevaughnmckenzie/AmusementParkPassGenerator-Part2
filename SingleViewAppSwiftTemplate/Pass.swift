@@ -23,69 +23,7 @@ struct Pass {
     
     func getAccessPrivileges() throws -> [AccessPermission] {
         
-        // MARK: Entrant Information Error Handeling
-        switch entrant {
-        case .employee(let employeeType):
-            guard personalInfo.firstName != nil else {
-                throw InfoError.missingInformation(inObject: personalInfo.description,
-                                                   description: "Please provide a First Name.")
-            }
-            
-            guard personalInfo.lastName != nil else {
-                throw InfoError.missingInformation(inObject: personalInfo.description,
-                                                   description: "Please provide a Last Name.")
-            }
-            
-            guard personalInfo.streetAddress != nil else {
-                throw InfoError.missingInformation(inObject: personalInfo.description,
-                                                   description: "Please provide a valid street address.")
-            }
-            
-            guard personalInfo.city != nil else {
-                throw InfoError.missingInformation(inObject: personalInfo.description,
-                                                   description: "Please provide a valid U.S. city.")
-            }
-            
-            guard personalInfo.state != nil else {
-                throw InfoError.missingInformation(inObject: personalInfo.description,
-                                                   description: "Please provide a valid U.S. state.")
-            }
-            
-            guard personalInfo.zipcode != nil, personalInfo.zipcode?.characters.count == 5,
-                Int.init(personalInfo.zipcode!) != nil  else {
-                throw InfoError.missingInformation(inObject: personalInfo.description,
-                                                   description: "Please provide a valid U.S. zipcode.")
-            }
-            
-            if employeeType == .contract {
-                guard let projectNumber = personalInfo.projectNumber, Int(projectNumber) != nil else {
-                    throw InfoError.invalidInfo(inObject: personalInfo.description,
-                                                description: "Please enter a valid project number.")
-                }
-            }
-            
-        case .guest(.child):
-            
-            let earliestValidBirthday =  Calendar.current.date(byAdding: .year, value: -5, to: Date())!
-            
-            guard personalInfo.birthdayDate != nil else {
-                throw InfoError.missingInformation(inObject: personalInfo.description,
-                                                   description: "Please provide a valid birthday.")
-            }
-            guard (personalInfo.birthdayDate)! < Date() else {
-                throw InfoError.invalidBirthday(inObject: personalInfo.description,
-                                                description: "Appearently, this individual has not been born yet.")
-            }
-            
-            guard (personalInfo.birthdayDate)! >= earliestValidBirthday else {
-                throw InfoError.invalidBirthday(inObject: personalInfo.description,
-                                                description: "This individual is too old to be entered as a Free Child.")
-            }
-            
-        default:
-            break
-        }
-        
+                
         
         // Places enum representations of all permissions granted to an entrant type into an array of permissions
         switch entrant {
