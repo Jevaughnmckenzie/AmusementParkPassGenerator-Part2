@@ -19,7 +19,7 @@ class AreaAccessKiosk: Kiosk {
             case .areaAccess(authorization) :
                 switch areaBeingAuthorized {
                 case .amusement, .kitchen, .maintenance, .office, .rideControl:
-                    print("Access authorized")
+                    return true
                     catagoricalPermissions += 1
                 }
             default:

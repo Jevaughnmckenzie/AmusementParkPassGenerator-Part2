@@ -17,7 +17,6 @@ enum Entrant {
         case vip = "VIP"
         case child = "Child"
         case senior = "Senior"
-        case seasonPass = "Season Pass"
     }
     
     enum EmployeeType: String {
