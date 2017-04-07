@@ -11,9 +11,9 @@ import UIKit
 class PassController: UIViewController {
 
     var pass: Pass!
-    weak var rideAccessKiosk: RideAccessKiosk!
+//    weak var rideAccessKiosk: RideAccessKiosk!
     weak var areaAccessKiosk: AreaAccessKiosk!
-    weak var vendorStallKiosk: VendorStallKiosk!
+//    weak var vendorStallKiosk: VendorStallKiosk!
     
     @IBOutlet weak var entrantNameLabel: UILabel!
     @IBOutlet weak var entrantTypeLabel: UILabel!
@@ -28,9 +28,9 @@ class PassController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rideAccessKiosk = RideAccessKiosk(pass: pass)
+//        rideAccessKiosk = RideAccessKiosk(pass: pass)
         areaAccessKiosk = AreaAccessKiosk(pass: pass)
-        vendorStallKiosk = VendorStallKiosk(pass: pass)
+//        vendorStallKiosk = VendorStallKiosk(pass: pass)
         
         loadPassInfo()
     }
@@ -169,8 +169,9 @@ class PassController: UIViewController {
 //        print("\(pass.entrant)")
 //        print("\(pass.getAccessPrivileges())")
         
-        let p = areaAccessKiosk.swipe(authorizing: AccessPermission.areaAccess(.office))
-        print(p)
+        if areaAccessKiosk.swipeFunction(authorizing: .office) {
+            print("yayyyyyy")
+        }
         //{
 //            testResultsView.backgroundColor = UIColor.green
 //            testResultsMessage.text = "Access Granted"
