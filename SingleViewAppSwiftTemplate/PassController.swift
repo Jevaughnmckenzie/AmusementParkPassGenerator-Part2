@@ -12,7 +12,7 @@ class PassController: UIViewController {
 
     var pass: Pass!
 //    weak var rideAccessKiosk: RideAccessKiosk!
-    weak var areaAccessKiosk: AreaAccessKiosk!
+    var areaAccessKiosk = AreaAccessKiosk(for: .office)
 //    weak var vendorStallKiosk: VendorStallKiosk!
     
     @IBOutlet weak var entrantNameLabel: UILabel!
@@ -29,7 +29,7 @@ class PassController: UIViewController {
         super.viewDidLoad()
         
 //        rideAccessKiosk = RideAccessKiosk(pass: pass)
-        areaAccessKiosk = AreaAccessKiosk(for: .office)
+//        areaAccessKiosk = AreaAccessKiosk(for: .office)
 //        vendorStallKiosk = VendorStallKiosk(pass: pass)
         
 //        loadPassInfo()
