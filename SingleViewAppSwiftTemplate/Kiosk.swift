@@ -11,7 +11,7 @@ import UIKit
 protocol Swipeable {
     var pass: Pass { get }
     func swipeFunction(authorizing authorization: AccessPermission) // depending on the kiosk, it returns a string after determining privileges
-    func swipe(authorizing: AccessPermission) // prevents a swipe from occuring twice when called on a particular instance
+    func swipe(authorizing: AccessPermission) -> Bool // prevents a swipe from occuring twice when called on a particular instance
     func printBirthdayMessage()
 }
 
@@ -29,8 +29,9 @@ class Kiosk: Swipeable {
         self.pass = pass
     }
     
-    func swipeFunction(authorizing authorization: AccessPermission) { // preforms all the actual acts involved in checking permissions
+    func swipeFunction(authorizing authorization: AccessPermission) -> Bool { // preforms all the actual acts involved in checking permissions
         print("Please pick a more spesific kiosk.")
+        return false
         
     }
     

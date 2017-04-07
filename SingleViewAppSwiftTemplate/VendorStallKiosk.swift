@@ -10,35 +10,25 @@ class VendorStallKiosk: Kiosk {
     
     let description = "VendorStallKiosk"
     
-    override func swipeFunction(authorizing authorization: AccessPermission) {
+    override func swipeFunction(authorizing authorization: AccessPermission) -> Bool {
         var catagoricalPermissions = 0
-        do {
-            for permission in try pass.getAccessPrivileges() {
-                switch authorization {
-                case .discountAccess(let discountType, let discountAmount) :
-                    switch discountType {
-                    case .food, .merchandise:
-                        print("Please provide discount of \(discountAmount).")
-                        catagoricalPermissions += 1
-                    }
-                default:
-                    continue
+        for permission in try pass.getAccessPrivileges() {
+            switch authorization {
+            case .discountAccess(let discountType, let discountAmount) :
+                switch discountType {
+                case .food, .merchandise:
+                    print("Please provide discount of \(discountAmount).")
+                    catagoricalPermissions += 1
                 }
+            default:
+                continue
             }
-            
-            if catagoricalPermissions == 0 {
-                print("No discount")
-            }
-            printBirthdayMessage()
-            
-        }  catch InfoError.missingInformation(let object, let description) {
-            print("Error in \(String(describing:object)): \(description)")
-        } catch InfoError.invalidBirthday(let description) {
-            print("Invalid birthday: \(description)")
-        } catch {
-            print("Uncaught error in pass.getAccesspriveleges()")
         }
         
+        if catagoricalPermissions == 0 {
+            print("No discount")
+        }
+        printBirthdayMessage()
     }
 }
 

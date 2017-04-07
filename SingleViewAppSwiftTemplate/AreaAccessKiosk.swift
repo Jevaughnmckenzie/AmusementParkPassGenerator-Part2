@@ -10,32 +10,23 @@ class AreaAccessKiosk: Kiosk {
     let description = "AreaAccessKiosk"
     
     
-    override func swipeFunction(authorizing authorization: AccessPermission) {
+    override func swipeFunction(authorizing authorization: AccessPermission) -> Bool {
         
         var catagoricalPermissions = 0 // Used to relay whether or not an entrant has no permissions in a situation
-        
-        do{
-            for permission in try pass.getAccessPrivileges() {
-                switch authorization {
-                case .areaAccess(.amusement), .areaAccess(.kitchen), .areaAccess(.maintenance), .areaAccess(.office), .areaAccess(.rideControl):
-                    print("Access authorized")
-                    catagoricalPermissions += 1
-                default:
-                    continue
-                }
+ 
+        for permission in pass.getAccessPrivileges() {
+            switch authorization {
+            case .areaAccess(.amusement), .areaAccess(.kitchen), .areaAccess(.maintenance), .areaAccess(.office), .areaAccess(.rideControl):
+                return true
+                catagoricalPermissions += 1
+            default:
+                return false
             }
-            if catagoricalPermissions == 0 {
-                print("Access Denied")
-            }
-            printBirthdayMessage()
-            
-        } catch InfoError.missingInformation(let object, let description) {
-            print("Error in \(String(describing: object)): \(description)")
-        } catch InfoError.invalidBirthday(let description) {
-            print("Invalid birthday: \(description)")
-        } catch {
-            print("Uncaught error in pass.getAccesspriveleges()")
         }
+        if catagoricalPermissions == 0 {
+            print("Access Denied")
+        }
+        printBirthdayMessage()
     }
 }
 

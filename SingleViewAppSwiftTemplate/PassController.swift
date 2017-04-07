@@ -149,11 +149,24 @@ class PassController: UIViewController {
         case .guest(.regularGuest), .guest(.child), .employee(.contract), .vendor:
             foodDiscountLabel.text = "No Food Discount"
             merchendiseDiscountLabel.text = "No Merchendise Discount"
+        case .guest(.senior):
+            foodDiscountLabel.text = "10% Food Discount"
+            merchendiseDiscountLabel.text = "10% Merchendise Discount"
         case .guest(.vip), .guest(.seasonPass):
-            foodDiscountLabel.text = ""
+            foodDiscountLabel.text = "10% Food Discount"
+            merchendiseDiscountLabel.text = "20% Merchendise Discount"
+        case .employee(.foodService), .employee(.rideService), .employee(.maintenance):
+            foodDiscountLabel.text = "15% Food Discount"
+            merchendiseDiscountLabel.text = "25% Merchendise Discount"
+        case .manager:
+            foodDiscountLabel.text = "25% Food Discount"
+            merchendiseDiscountLabel.text = "25% Merchendise Discount"
         }
     }
 
+    @IBAction func checkOfficePermission(_ sender: UIButton) {
+        
+    }
     
 
 }

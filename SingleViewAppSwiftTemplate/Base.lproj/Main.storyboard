@@ -312,28 +312,36 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RaH-n8-EoL">
                                                 <rect key="frame" x="0.0" y="0.0" width="192" height="90"/>
-                                                <state key="normal" title="Guest"/>
+                                                <state key="normal" title="Guest">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="changeSubNav:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hgh-Qo-1IT"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8k-j1-lRY">
                                                 <rect key="frame" x="192" y="0.0" width="192" height="90"/>
-                                                <state key="normal" title="Employee"/>
+                                                <state key="normal" title="Employee">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="changeSubNav:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VmG-XR-3jo"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tD-g3-Vfo">
                                                 <rect key="frame" x="384" y="0.0" width="192" height="90"/>
-                                                <state key="normal" title="Manager"/>
+                                                <state key="normal" title="Manager">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="changeSubNav:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xXL-Ay-VJd"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKp-ab-lGA">
                                                 <rect key="frame" x="576" y="0.0" width="192" height="90"/>
-                                                <state key="normal" title="Vendor"/>
+                                                <state key="normal" title="Vendor">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="changeSubNav:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eom-wD-cQ6"/>
                                                 </connections>
@@ -341,7 +349,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.39821491491957434" green="0.13162038847565211" blue="0.44353820913807107" alpha="0.73706870719178086" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Sew-T3-f2P" firstAttribute="top" secondItem="vSk-7Z-98s" secondAttribute="top" id="aBL-LZ-Kdc"/>
                                     <constraint firstItem="Sew-T3-f2P" firstAttribute="leading" secondItem="vSk-7Z-98s" secondAttribute="leading" id="aXK-hj-eCz"/>
@@ -352,7 +360,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4S-DS-n8H">
                                 <rect key="frame" x="0.0" y="118" width="768" height="70"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.26588670112512053" green="0.1065446752262203" blue="0.30441766069625231" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="AbI-tS-oWV"/>
                                 </constraints>
@@ -631,6 +639,7 @@
                                 </state>
                                 <connections>
                                     <action selector="checkAreaAccessPermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="gVy-Lq-q3r"/>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="m4P-eS-xL2"/>
                                 </connections>
                             </button>
                         </subviews>
