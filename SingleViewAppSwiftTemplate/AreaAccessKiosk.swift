@@ -16,11 +16,12 @@ class AreaAccessKiosk: Kiosk {
         printBirthdayMessage()
         for permission in pass.getAccessPrivileges() {
             switch permission {
-            case .areaAccess(.amusement), .areaAccess(.kitchen), .areaAccess(.maintenance), .areaAccess(.office), .areaAccess(.rideControl):
-                if authorization.rawValue == permission.rawValue {
-                    return true
+            case .areaAccess(authorization) :
+                switch areaBeingAuthorized {
+                case .amusement, .kitchen, .maintenance, .office, .rideControl:
+                    print("Access authorized")
+                    catagoricalPermissions += 1
                 }
-                catagoricalPermissions += 1
             default:
                 continue
             }
