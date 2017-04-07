@@ -28,7 +28,7 @@ class Kiosk: Swipeable {
         
     }
     
-    func swipe(pass: Pass) { // The swipe function preforms a "double swipe check" before calling the swipe function
+    func swipe(pass: Pass) -> Bool { // The swipe function preforms a "double swipe check" before calling the swipe function
         let timestampFormatter = DateFormatter()
         let swipeTimeStamp = Date()
         
@@ -43,7 +43,7 @@ class Kiosk: Swipeable {
         
         // Does not check for doubleswipe if there is not two timestamps in the timeStampHistory array
         if timeStampHistory.count < 2 {
-            swipeFunction(pass: pass)
+           return swipeFunction(pass: pass)
         } else{
             
             let previousTimeStampIndex = timeStampHistory.count - 2
@@ -56,7 +56,7 @@ class Kiosk: Swipeable {
                 let lastSwipe = timestampFormatter.date(from: previousTimeStamp) {
                 let nextAbilityToSwipe = lastSwipe.addingTimeInterval(5)
                 if currentSwipe > nextAbilityToSwipe {
-                    swipeFunction(pass: pass)
+                  return  swipeFunction(pass: pass)
                 } else {
                     print("Please try again later")
                 }

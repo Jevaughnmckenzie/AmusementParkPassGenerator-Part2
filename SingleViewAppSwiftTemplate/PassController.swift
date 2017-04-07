@@ -29,7 +29,7 @@ class PassController: UIViewController {
         super.viewDidLoad()
         
 //        rideAccessKiosk = RideAccessKiosk(pass: pass)
-        areaAccessKiosk = AreaAccessKiosk(pass: pass)
+//        areaAccessKiosk = AreaAccessKiosk(for: pass)
 //        vendorStallKiosk = VendorStallKiosk(pass: pass)
         
         loadPassInfo()
@@ -169,7 +169,7 @@ class PassController: UIViewController {
 //        print("\(pass.entrant)")
 //        print("\(pass.getAccessPrivileges())")
         
-        if areaAccessKiosk.swipeFunction(authorizing: .office) {
+        if areaAccessKiosk.swipeFunction(pass: .office) {
             print("yayyyyyy")
         }
         //{
