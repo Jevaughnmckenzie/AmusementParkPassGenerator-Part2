@@ -7,10 +7,6 @@
 //
 
 enum AccessPermission {
-    case areaAccess(AreaAccess)
-    case rideAccess(RideAccess)
-    case ridePriority(RidePriority)
-    case discountAccess(Discount, Int)
     
     enum AreaAccess {
         case amusement

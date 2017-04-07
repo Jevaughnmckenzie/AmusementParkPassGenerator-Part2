@@ -10,19 +10,24 @@ class RideAccessKiosk: Kiosk {
     
     let description = "RideAccessKiosk"
     
-    override func swipeFunction(authorizing authorization: AccessPermission) -> Bool {
-        for permission in try pass.getAccessPrivileges() {
+    func swipeFunction(authorizing authorization: AccessPermission.RideAccess) -> Bool {
+        for permission in pass.getRideAccessPrivileges() {
                 switch authorization {
                 case .rideAccess(.allRides):
-                    print("Ride access granted!")
+                    return true
                     
                 case .rideAccess(.noRides):
-                    print("Ride access denied.")
-                case .ridePriority(.standard):
-                    print("Please enter at the end of the line.")
-                case .ridePriority(.skipPrivilege):
-                    print("Please proceed to the end of the line.")
-            
+                    return false
+            }
+        }
+    func swipeFunction(authorizing authorization: AccessPermission.RidePriority) -> Bool {
+            for permission in pass.getRidePriorityPermissions() {
+                if authorization == permission {
+                 AccessPermission.RidePriority.standard:
+                    return true
+                } else if 
+                AccessPermission.RidePriority.skipPrivilege:
+                    return false
                 default:
                     continue
             }

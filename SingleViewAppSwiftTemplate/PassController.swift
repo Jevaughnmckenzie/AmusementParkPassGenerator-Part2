@@ -168,13 +168,16 @@ class PassController: UIViewController {
 //        print("Joy is annoying")
 //        print("\(pass.entrant)")
 //        print("\(pass.getAccessPrivileges())")
-        if areaAccessKiosk.swipeFunction(authorizing: AccessPermission.areaAccess(.office)){
-            testResultsView.backgroundColor = UIColor.green
-            testResultsMessage.text = "Access Granted"
-        } else {
-            testResultsView.backgroundColor = UIColor.red
-            testResultsMessage.text = "Access Denied"
-        }
+        
+        let p = areaAccessKiosk.swipe(authorizing: AccessPermission.areaAccess(.office))
+        print(p)
+        //{
+//            testResultsView.backgroundColor = UIColor.green
+//            testResultsMessage.text = "Access Granted"
+//        } else {
+//            testResultsView.backgroundColor = UIColor.red
+//            testResultsMessage.text = "Access Denied"
+//        }
         
         
 //        if areaAccessKiosk.swipe(authorizing: .areaAccess(.office)) {
