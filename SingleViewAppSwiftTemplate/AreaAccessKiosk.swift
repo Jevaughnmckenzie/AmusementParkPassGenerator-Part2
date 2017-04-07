@@ -13,7 +13,7 @@ class AreaAccessKiosk: Kiosk {
     func swipeFunction(authorizing authorization: AccessPermission.AreaAccess) -> Bool {
         
         var catagoricalPermissions = 0 // Used to relay whether or not an entrant has no permissions in a situation
-        printBirthdayMessage()
+//        printBirthdayMessage()
         for permission in pass.getAccessPrivileges() {
             switch permission {
             case .areaAccess(authorization) :

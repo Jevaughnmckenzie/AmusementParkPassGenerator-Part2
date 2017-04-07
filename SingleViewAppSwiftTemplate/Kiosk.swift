@@ -6,13 +6,12 @@
 //  Copyright © 2017 Treehouse. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol Swipeable {
-    var pass: Pass { get }
-    func swipeFunction(authorizing authorization: AccessPermission) -> Bool// depending on the kiosk, it returns a string after determining privileges
-    func swipe(authorizing: AccessPermission) -> Bool // prevents a swipe from occuring twice when called on a particular instance
-    func printBirthdayMessage()
+    func swipeFunction(pass: Pass) // depending on the kiosk, it returns a string after determining privileges
+    func swipe(pass: Pass) // prevents a swipe from occuring twice when called on a particular instance
+    func printBirthdayMessage(pass: Pass)
 }
 
 
@@ -20,16 +19,16 @@ protocol Swipeable {
 // The subclasses are always ustilized instead
 class Kiosk: Swipeable {
     
-    var pass: Pass
     var timeStampHistory = [String]()
     let calendar = Calendar.current
     
     
-    init (pass: Pass) {
-        self.pass = pass
+    func swipeFunction(pass: Pass) { // preforms all the actual acts involved in checking permissions
+        print("Please pick a more spesific kiosk.")
+        
     }
     
-    func swipe(authorizing authorization: AccessPermission) -> Bool { // The swipe function preforms a "double swipe check" before calling the swipe function
+    func swipe(pass: Pass) { // The swipe function preforms a "double swipe check" before calling the swipe function
         let timestampFormatter = DateFormatter()
         let swipeTimeStamp = Date()
         
@@ -43,48 +42,39 @@ class Kiosk: Swipeable {
         timestampFormatter.dateFormat = "hh:mm:ss a."
         
         // Does not check for doubleswipe if there is not two timestamps in the timeStampHistory array
-        print(timeStampHistory)
         if timeStampHistory.count < 2 {
-           return swipeFunction(authorizing: authorization)
+            swipeFunction(pass: pass)
         } else{
-        
-        let previousTimeStampIndex = timeStampHistory.count - 2
+            
+            let previousTimeStampIndex = timeStampHistory.count - 2
             let previousTimeStamp = timeStampHistory[previousTimeStampIndex]
-        
+            
             let currentTimeStampIndex = timeStampHistory.count - 1
             let currentTimeStamp = timeStampHistory[currentTimeStampIndex]
-        
+            
             if let currentSwipe = timestampFormatter.date(from: currentTimeStamp),
                 let lastSwipe = timestampFormatter.date(from: previousTimeStamp) {
                 let nextAbilityToSwipe = lastSwipe.addingTimeInterval(5)
                 if currentSwipe > nextAbilityToSwipe {
-                   return swipeFunction(authorizing: authorization)
+                    swipeFunction(pass: pass)
                 } else {
                     print("Please try again later")
                 }
             }
         }
-        return false
     }
     
-    func printBirthdayMessage() {
+    func printBirthdayMessage(pass: Pass) {
         if let  birthdayDate = pass.personalInfo.birthdayDate {
             let birthdayDateComponents = calendar.dateComponents([.year, .month, .day], from: birthdayDate)
             let currentDayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
             
             if  birthdayDateComponents.month == currentDayComponents.month
                 && birthdayDateComponents.day == currentDayComponents.day {
-                    print("Happy Birthday!")
+                print("Happy Birthday!")
             }
         }
     }
-    
-    func swipeFunction(authorizing authorization: AccessPermission) -> Bool { // preforms all the actual acts involved in checking permissions
-        print("Please pick a more spesific kiosk.")
-        return false
-        
-    }
-    
 }
 
 
