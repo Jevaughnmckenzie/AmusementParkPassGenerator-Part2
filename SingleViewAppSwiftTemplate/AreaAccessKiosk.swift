@@ -14,7 +14,7 @@ class AreaAccessKiosk: Kiosk {
         self.areaBeingAuthorized = areaBeingAuthorized
     }
     
-    func swipeFunction(pass: Pass, au) -> Bool {
+    override func swipeFunction(pass: Pass) -> Bool {
         
         var catagoricalPermissions = 0 // Used to relay whether or not an entrant has no permissions in a situation
 

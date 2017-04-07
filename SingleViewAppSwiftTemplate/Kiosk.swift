@@ -9,8 +9,8 @@
 import Foundation
 
 protocol Swipeable {
-    func swipeFunction(pass: Pass) // depending on the kiosk, it returns a string after determining privileges
-    func swipe(pass: Pass) // prevents a swipe from occuring twice when called on a particular instance
+    func swipeFunction(pass: Pass) -> Bool// depending on the kiosk, it returns a string after determining privileges
+    func swipe(pass: Pass) -> Bool // prevents a swipe from occuring twice when called on a particular instance
     func printBirthdayMessage(pass: Pass)
 }
 
@@ -23,9 +23,9 @@ class Kiosk: Swipeable {
     let calendar = Calendar.current
     
     
-    func swipeFunction(pass: Pass) { // preforms all the actual acts involved in checking permissions
+    func swipeFunction(pass: Pass) -> Bool { // preforms all the actual acts involved in checking permissions
         print("Please pick a more spesific kiosk.")
-        
+        return false
     }
     
     func swipe(pass: Pass) -> Bool { // The swipe function preforms a "double swipe check" before calling the swipe function
@@ -62,6 +62,7 @@ class Kiosk: Swipeable {
                 }
             }
         }
+        return false
     }
     
     func printBirthdayMessage(pass: Pass) {

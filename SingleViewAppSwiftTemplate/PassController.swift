@@ -29,10 +29,10 @@ class PassController: UIViewController {
         super.viewDidLoad()
         
 //        rideAccessKiosk = RideAccessKiosk(pass: pass)
-//        areaAccessKiosk = AreaAccessKiosk(for: pass)
+        areaAccessKiosk = AreaAccessKiosk(
 //        vendorStallKiosk = VendorStallKiosk(pass: pass)
         
-        loadPassInfo()
+//        loadPassInfo()
     }
 
     
