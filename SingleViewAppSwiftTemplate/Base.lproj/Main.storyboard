@@ -500,9 +500,6 @@
                                 <state key="normal" title="Kitchen">
                                     <color key="titleColor" red="0.15931858091783838" green="0.5433359565883249" blue="0.13358586495680247" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="checkAreaAccessPermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="W0p-5f-g2s"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5A-fZ-KRs">
                                 <rect key="frame" x="227" y="944" width="314" height="60"/>
@@ -550,9 +547,6 @@
                                 <state key="normal" title="Ride Control">
                                     <color key="titleColor" red="0.15931858091783838" green="0.5433359565883249" blue="0.13358586495680247" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="checkAreaAccessPermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="R0Y-u5-A2E"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Lu-D6-Zqp">
                                 <rect key="frame" x="50.5" y="607" width="150" height="60"/>
@@ -565,9 +559,6 @@
                                 <state key="normal" title="Rides">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="checkRidePermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="S11-Ph-ieI"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNX-hK-AaJ">
                                 <rect key="frame" x="221" y="607" width="150" height="60"/>
@@ -580,9 +571,6 @@
                                 <state key="normal" title="Food Discount">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="checkDiscountPermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="5Vb-8C-CbF"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-8A-GlP">
                                 <rect key="frame" x="391" y="607" width="150" height="60"/>
@@ -607,9 +595,6 @@
                                 <state key="normal" title="Maintenance">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="checkAreaAccessPermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="jzc-7X-dEh"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKX-hy-A3V">
                                 <rect key="frame" x="560" y="607" width="150" height="60"/>
@@ -622,9 +607,6 @@
                                 <state key="normal" title="Amusement">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="checkAreaAccessPermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="Y4R-7u-pCG"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EN-k4-HQn">
                                 <rect key="frame" x="50.5" y="523" width="150.5" height="60"/>
@@ -638,8 +620,7 @@
                                     <color key="titleColor" red="0.15931858091783838" green="0.5433359565883249" blue="0.13358586495680247" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="checkAreaAccessPermissions:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="gVy-Lq-q3r"/>
-                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="m4P-eS-xL2"/>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="brI-Rz-p3u"/>
                                 </connections>
                             </button>
                         </subviews>

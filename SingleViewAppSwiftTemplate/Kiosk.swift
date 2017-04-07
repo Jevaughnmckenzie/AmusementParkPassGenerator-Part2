@@ -10,7 +10,7 @@ import UIKit
 
 protocol Swipeable {
     var pass: Pass { get }
-    func swipeFunction(authorizing authorization: AccessPermission) // depending on the kiosk, it returns a string after determining privileges
+    func swipeFunction(authorizing authorization: AccessPermission) -> Bool// depending on the kiosk, it returns a string after determining privileges
     func swipe(authorizing: AccessPermission) -> Bool // prevents a swipe from occuring twice when called on a particular instance
     func printBirthdayMessage()
 }
@@ -29,13 +29,7 @@ class Kiosk: Swipeable {
         self.pass = pass
     }
     
-    func swipeFunction(authorizing authorization: AccessPermission) -> Bool { // preforms all the actual acts involved in checking permissions
-        print("Please pick a more spesific kiosk.")
-        return false
-        
-    }
-    
-    func swipe(authorizing authorization: AccessPermission) { // The swipe function preforms a "double swipe check" before calling the swipe function
+    func swipe(authorizing authorization: AccessPermission) -> Bool { // The swipe function preforms a "double swipe check" before calling the swipe function
         let timestampFormatter = DateFormatter()
         let swipeTimeStamp = Date()
         
@@ -49,8 +43,9 @@ class Kiosk: Swipeable {
         timestampFormatter.dateFormat = "hh:mm:ss a."
         
         // Does not check for doubleswipe if there is not two timestamps in the timeStampHistory array
+        print(timeStampHistory)
         if timeStampHistory.count < 2 {
-            swipeFunction(authorizing: authorization)
+           return swipeFunction(authorizing: authorization)
         } else{
         
         let previousTimeStampIndex = timeStampHistory.count - 2
@@ -63,12 +58,13 @@ class Kiosk: Swipeable {
                 let lastSwipe = timestampFormatter.date(from: previousTimeStamp) {
                 let nextAbilityToSwipe = lastSwipe.addingTimeInterval(5)
                 if currentSwipe > nextAbilityToSwipe {
-                    swipeFunction(authorizing: authorization)
+                   return swipeFunction(authorizing: authorization)
                 } else {
                     print("Please try again later")
                 }
             }
         }
+        return false
     }
     
     func printBirthdayMessage() {
@@ -82,6 +78,13 @@ class Kiosk: Swipeable {
             }
         }
     }
+    
+    func swipeFunction(authorizing authorization: AccessPermission) -> Bool { // preforms all the actual acts involved in checking permissions
+        print("Please pick a more spesific kiosk.")
+        return false
+        
+    }
+    
 }
 
 

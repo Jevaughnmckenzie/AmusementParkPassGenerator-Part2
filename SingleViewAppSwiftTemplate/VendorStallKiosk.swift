@@ -29,6 +29,7 @@ class VendorStallKiosk: Kiosk {
             print("No discount")
         }
         printBirthdayMessage()
+        return false
     }
 }
 

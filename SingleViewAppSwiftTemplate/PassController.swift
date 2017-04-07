@@ -36,55 +36,55 @@ class PassController: UIViewController {
     }
 
     
-    @IBAction func checkAreaAccessPermissions(_ sender: UIButton) {
-        
-        guard let button = sender.currentTitle else { return }
-        switch button {
-        case "Ride Control":
-            areaAccessKiosk.swipe(authorizing: .areaAccess(.rideControl))
-        case "Kitchen" :
-            areaAccessKiosk.swipe(authorizing: .areaAccess(.kitchen))
-        case "Maintenance" :
-            areaAccessKiosk.swipe(authorizing: .areaAccess(.maintenance))
-        case "Office" :
-            areaAccessKiosk.swipe(authorizing: .areaAccess(.office))
-        case "Amusement" :
-            areaAccessKiosk.swipe(authorizing: .areaAccess(.amusement))
-            
-        default:
-            //FIXME: put alert or something
-            return
-        }
-        
-    }
-    
-    @IBAction func checkRidePermissions(_ sender: UIButton) {
-        
-        guard let button = sender.currentTitle else { return }
-        switch button {
-        case "Rides":
-            rideAccessKiosk.swipe(authorizing: .rideAccess(.allRides))
-            rideAccessKiosk.swipe(authorizing: .rideAccess(.noRides))
-            rideAccessKiosk.swipe(authorizing: .ridePriority(.skipPrivilege))
-            rideAccessKiosk.swipe(authorizing: .ridePriority(.standard))
-        default:
-            return
-        }
-        
-    }
-   
-    @IBAction func checkDiscountPermissions(_ sender: UIButton) {
-        
-        guard let button = sender.currentTitle else { return }
-        switch button {
-        case "Food Discount":
-            vendorStallKiosk.swipe(authorizing: .discountAccess(.food, 5))
-            //FIXME: Add remaining code
-        default:
-            return
-        }
-        
-    }
+//    @IBAction func checkAreaAccessPermissions(_ sender: UIButton) {
+//        
+//        guard let button = sender.currentTitle else { return }
+//        switch button {
+//        case "Ride Control":
+//            areaAccessKiosk.swipe(authorizing: .areaAccess(.rideControl))
+//        case "Kitchen" :
+//            areaAccessKiosk.swipe(authorizing: .areaAccess(.kitchen))
+//        case "Maintenance" :
+//            areaAccessKiosk.swipe(authorizing: .areaAccess(.maintenance))
+//        case "Office" :
+//            areaAccessKiosk.swipe(authorizing: .areaAccess(.office))
+//        case "Amusement" :
+//            areaAccessKiosk.swipe(authorizing: .areaAccess(.amusement))
+//            
+//        default:
+//            //FIXME: put alert or something
+//            return
+//        }
+//        
+//    }
+//    
+//    @IBAction func checkRidePermissions(_ sender: UIButton) {
+//        
+//        guard let button = sender.currentTitle else { return }
+//        switch button {
+//        case "Rides":
+//            rideAccessKiosk.swipe(authorizing: .rideAccess(.allRides))
+//            rideAccessKiosk.swipe(authorizing: .rideAccess(.noRides))
+//            rideAccessKiosk.swipe(authorizing: .ridePriority(.skipPrivilege))
+//            rideAccessKiosk.swipe(authorizing: .ridePriority(.standard))
+//        default:
+//            return
+//        }
+//        
+//    }
+//   
+//    @IBAction func checkDiscountPermissions(_ sender: UIButton) {
+//        
+//        guard let button = sender.currentTitle else { return }
+//        switch button {
+//        case "Food Discount":
+//            vendorStallKiosk.swipe(authorizing: .discountAccess(.food, 5))
+//            //FIXME: Add remaining code
+//        default:
+//            return
+//        }
+//        
+//    }
     
     func loadPassInfo() {
         // Name
@@ -165,8 +165,27 @@ class PassController: UIViewController {
     }
 
     @IBAction func checkOfficePermission(_ sender: UIButton) {
+//        print("Joy is annoying")
+//        print("\(pass.entrant)")
+//        print("\(pass.getAccessPrivileges())")
+        if areaAccessKiosk.swipeFunction(authorizing: AccessPermission.areaAccess(.office)){
+            testResultsView.backgroundColor = UIColor.green
+            testResultsMessage.text = "Access Granted"
+        } else {
+            testResultsView.backgroundColor = UIColor.red
+            testResultsMessage.text = "Access Denied"
+        }
         
+        
+//        if areaAccessKiosk.swipe(authorizing: .areaAccess(.office)) {
+//            testResultsView.backgroundColor = UIColor.green
+//            testResultsMessage.text = "Access Granted"
+//        } else {
+//            testResultsView.backgroundColor = UIColor.red
+//            testResultsMessage.text = "Access Denied"
+//        }
     }
+    
     
 
 }
