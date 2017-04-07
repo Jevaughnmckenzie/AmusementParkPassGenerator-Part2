@@ -83,7 +83,6 @@
 		A86EC2F11E8EC14E003B5B57 /* EmployeeNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeNavigation.swift; sourceTree = "<group>"; };
 		A86EC2F31E8EC2C8003B5B57 /* ManagerNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerNavigation.swift; sourceTree = "<group>"; };
 		A86EC2F51E8EC2DE003B5B57 /* VendorNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorNavigation.swift; sourceTree = "<group>"; };
-		A8A120C11E98086500804A28 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +152,6 @@
 				A8409A391E78437E0019DEAB /* InfoError.swift */,
 				A835F2171E8E9BA500E3A659 /* Entrant.swift */,
 				A835F2151E8E9B1100E3A659 /* AccessPermission.swift */,
-				A8A120C11E98086500804A28 /* MyPlayground.playground */,
 				A8409A311E7842DA0019DEAB /* Kiosk.swift */,
 				A835F21D1E8E9F6C00E3A659 /* AreaAccessKiosk.swift */,
 				A835F21F1E8EA04D00E3A659 /* RideAccessKiosk.swift */,
