@@ -272,6 +272,9 @@
                                                             <constraint firstAttribute="height" constant="60" id="fqC-ke-kWt"/>
                                                         </constraints>
                                                         <state key="normal" title="Populate Data"/>
+                                                        <connections>
+                                                            <action selector="populateData" destination="BYZ-38-t0r" eventType="touchUpInside" id="XFO-ef-5tZ"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

@@ -62,23 +62,24 @@ class Kiosk: Swipeable {
                 if currentSwipe > nextAbilityToSwipe {
                   return function(forPermission)
                 } else {
-                    print("Please try again later")
+                    print("Double swiped within 5 seconds")
                 }
             }
         }
         return false
     }
     
-    func printBirthdayMessage(pass: Pass) {
+    func printBirthdayMessage(pass: Pass) -> String {
         if let  birthdayDate = pass.personalInfo.birthdayDate {
             let birthdayDateComponents = calendar.dateComponents([.year, .month, .day], from: birthdayDate)
             let currentDayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
             
             if  birthdayDateComponents.month == currentDayComponents.month
                 && birthdayDateComponents.day == currentDayComponents.day {
-                print("Happy Birthday!")
+                return "Happy Birthday!"
             }
         }
+        return ""
     }
 }
 

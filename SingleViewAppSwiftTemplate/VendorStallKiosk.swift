@@ -12,14 +12,12 @@ class VendorStallKiosk: Kiosk {
     
     func swipeFunction(authorizing authorization: AccessPermission.Discount) -> Bool {
         printBirthdayMessage(pass: pass)
-        var catagoricalPermissions = 0
         for permission in pass.getAccessPrivileges() {
             switch permission {
             case .discountAccess(authorization, let discountAmount) :
                 switch authorization {
                 case .food, .merchandise:
                     return true
-                    catagoricalPermissions += 1
                 }
             default:
                 continue

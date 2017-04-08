@@ -8,7 +8,7 @@
 
 enum InfoError: Error {
     case missingInformation(inObject: String, description: String)
-    case invalidBirthday(description: String)
+    case invalidBirthday(inObject: String, description: String)
     case invalidInfo(inObject: String, description: String)
     case noEntrantChosen
 }

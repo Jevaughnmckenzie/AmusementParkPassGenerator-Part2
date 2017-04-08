@@ -15,7 +15,7 @@ struct ManagerNavigation {
     
     init() {
         
-        let seniorButton = entrantButton(withTitle: manager.senior.rawValue)
+        let seniorButton = entrantButton(withTitle: manager.head.rawValue)
         let generalButton = entrantButton(withTitle: manager.general.rawValue)
         let shiftButton = entrantButton(withTitle: manager.shift.rawValue)
         

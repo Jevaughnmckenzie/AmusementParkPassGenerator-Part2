@@ -181,7 +181,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                 disableTextFields([ssnTextField,companyTextField])
             case "Acme", "Orkin", "Fedex", "NW Electrical" :
                 enableTextFields([firstNameTextField, lastNameTextField, companyTextField,dobTextField])
-                disableTextFields([ssnTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
+                disableTextFields([ssnTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField, projectNumTextField])
             default:
                 print("Error inside the 'accessTextFields' fucntion")
             }
@@ -199,7 +199,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func determineEntrantType(_ sender: UIButton) -> Entrant {
+    func determineEntrantType(_ sender: UIButton) -> Entrant? {
         
         if let entrant = sender.currentTitle{
             switch entrant {
@@ -211,16 +211,18 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             case "Ride Service" : return Entrant.employee(.rideService)
             case "Maintenance" : return Entrant.employee(.maintenance)
             case "Contract" : return Entrant.employee(.contract)
-                //FIXME: Put in case for Manager subTypes
+            case "Shift" : return Entrant.manager(.shift)
+            case "General" : return Entrant.manager(.general)
+            case "Head" : return Entrant.manager(.head)
             case "Acme" : return Entrant.vendor(.acme)
             case "Orkin" : return Entrant.vendor(.orkin)
             case "Fedex" : return Entrant.vendor(.fedex)
             case "NW Electrical" : return Entrant.vendor(.nWElectrical)
             default:
-                return Entrant.manager
+                return nil
             }
         }
-        return Entrant.manager
+        return nil
     }
     
     
@@ -238,6 +240,13 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         guard let entrantType = currentEntrantType else {
             throw InfoError.noEntrantChosen
         }
+        
+        if dobTextField.text != "" {
+            guard entrantInfo.birthdayDate != nil else {
+                throw InfoError.invalidBirthday(inObject: entrantInfo.description, description: "Please enter a valid birthday.")
+            }
+        }
+        
         
         // MARK: Entrant Information Error Handeling
         switch entrantType {
@@ -279,6 +288,10 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                                                 description: "Please enter a valid project number.")
                 }
             }
+        case .vendor:
+            guard let vendorCompany = entrantInfo.company, vendorCompany != "", vendorCompany.lowercased() == "orkin" || vendorCompany.lowercased() == "acme" || vendorCompany.lowercased() == "fedex" || vendorCompany.lowercased() == "nw electrical" else {
+                throw InfoError.invalidInfo(inObject: entrantInfo.description, description: "Please enter the vendor's company.")
+            }
             
         case .guest(let guestType):
             guard entrantInfo.birthdayDate != nil else {
@@ -286,7 +299,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                                                    description: "Please provide a valid birthday.")
             }
             guard (entrantInfo.birthdayDate)! < Date() else {
-                throw InfoError.invalidBirthday(description: "Appearently, this individual has not been born yet.")
+                throw InfoError.invalidBirthday(inObject: entrantInfo.description, description: "Appearently, this individual has not been born yet.")
             }
             
             switch guestType {
@@ -294,7 +307,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                 let earliestValidBirthday =  Calendar.current.date(byAdding: .year, value: -5, to: Date())!
                 
                 guard (entrantInfo.birthdayDate)! >= earliestValidBirthday else {
-                    throw InfoError.invalidBirthday(description: "This individual is too old to be entered as a Free Child.")
+                    throw InfoError.invalidBirthday(inObject: entrantInfo.description, description: "This individual is too old to be entered as a Free Child.")
                 }
             case .senior:
                 let latestValidBirthday =  Calendar.current.date(byAdding: .year, value: -65, to: Date())!
@@ -303,7 +316,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                
                 
                 guard (entrantInfo.birthdayDate)! <= latestValidBirthday else {
-                    throw InfoError.invalidBirthday(description: "This individual is too young to be entered as a Senior.")
+                    throw InfoError.invalidBirthday(inObject: entrantInfo.description, description: "This individual is too young to be entered as a Senior.")
                 }
             default:
                 break
@@ -315,6 +328,47 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         return Pass(entrant: entrantType, personalInfo: entrantInfo)
     }
+    
+    @IBAction func populateData() {
+
+        let genericEntrant = GenericEntrant()
+        
+        firstNameTextField.text = genericEntrant.firstName
+        lastNameTextField.text = genericEntrant.lastName
+        dobTextField.text = genericEntrant.dobAdult
+        
+        if let entrant = currentEntrantType {
+            switch entrant {
+            case .manager, .guest(.seasonPass):
+                streetAddressTextField.text = genericEntrant.streetAddress
+                cityTextField.text = genericEntrant.city
+                stateTextField.text = genericEntrant.state
+                zipcodeTextField.text = genericEntrant.zipcode
+            case .guest(let guestType):
+                switch guestType {
+                case .child:
+                    dobTextField.text = genericEntrant.dobChild
+                case .senior:
+                    dobTextField.text = genericEntrant.dobSenior
+                default:
+                    return
+                }
+            case .employee(let employeeType):
+                streetAddressTextField.text = genericEntrant.streetAddress
+                cityTextField.text = genericEntrant.city
+                stateTextField.text = genericEntrant.state
+                zipcodeTextField.text = genericEntrant.zipcode
+                if employeeType == .contract {
+                    projectNumTextField.text = genericEntrant.projectNum
+                }
+            
+            case .vendor:
+                companyTextField.text = genericEntrant.company
+            }
+        }
+    }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -337,16 +391,18 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                 
                 alertController.addAction(action)
                 present(alertController, animated: true, completion: nil)
-            } catch InfoError.invalidBirthday(let description){
-                let alertController = UIAlertController(title: "Invalid Birthday", message: "\(description)", preferredStyle: .alert)
+            } catch InfoError.invalidBirthday(let object, let description){
+                let alertController = UIAlertController(title: "Invalid Birthday", message: "Error in \(object): \(description)", preferredStyle: .alert)
                 
                 alertController.addAction(action)
+                present(alertController, animated: true, completion: nil)
             } catch InfoError.invalidInfo(let object, let description) {
                 let alertController = UIAlertController(title: "Invalid Information in \(object)", message: "\(description)", preferredStyle: .alert)
                 
                 alertController.addAction(action)
+                present(alertController, animated: true, completion: nil)
             } catch {
-                fatalError()
+                fatalError("Uncaught Error")
             }
         }
     }

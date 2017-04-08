@@ -9,7 +9,7 @@
 enum Entrant {
     case guest(GuestType)
     case employee(EmployeeType)
-    case manager
+    case manager(ManagerType)
     case vendor(VendorType)
     
     enum GuestType: String {
@@ -38,7 +38,7 @@ enum Entrant {
     enum ManagerType: String {
         case shift = "Shift"
         case general = "General"
-        case senior = "Head"
+        case head = "Head"
     }
     
     enum VendorType: String {
