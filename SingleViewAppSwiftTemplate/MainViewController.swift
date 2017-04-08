@@ -274,16 +274,13 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             }
             
             if employeeType == .contract {
-                guard let projectNumber = entrantInfo.projectNumber, Int(projectNumber) != nil else {
-                    throw InfoError.invalidInfo(inObject: entrantInfo.description,
+                guard let projectNumber = entrantInfo.projectNumber, Int(projectNumber) != nil, projectNumber == "1001" || projectNumber == "1002" || projectNumber == "1003" || projectNumber == "2001" || projectNumber == "2002" else {
+                    throw InfoError.missingInformation(inObject: entrantInfo.description,
                                                 description: "Please enter a valid project number.")
                 }
             }
             
-        case .guest(.child):
-            
-            let earliestValidBirthday =  Calendar.current.date(byAdding: .year, value: -5, to: Date())!
-            
+        case .guest(let guestType):
             guard entrantInfo.birthdayDate != nil else {
                 throw InfoError.missingInformation(inObject: entrantInfo.description,
                                                    description: "Please provide a valid birthday.")
@@ -292,10 +289,25 @@ class MainViewController: UIViewController, UITextFieldDelegate {
                 throw InfoError.invalidBirthday(description: "Appearently, this individual has not been born yet.")
             }
             
-            guard (entrantInfo.birthdayDate)! >= earliestValidBirthday else {
-                throw InfoError.invalidBirthday(description: "This individual is too old to be entered as a Free Child.")
+            switch guestType {
+            case .child:
+                let earliestValidBirthday =  Calendar.current.date(byAdding: .year, value: -5, to: Date())!
+                
+                guard (entrantInfo.birthdayDate)! >= earliestValidBirthday else {
+                    throw InfoError.invalidBirthday(description: "This individual is too old to be entered as a Free Child.")
+                }
+            case .senior:
+                let latestValidBirthday =  Calendar.current.date(byAdding: .year, value: -65, to: Date())!
+                
+                
+               
+                
+                guard (entrantInfo.birthdayDate)! <= latestValidBirthday else {
+                    throw InfoError.invalidBirthday(description: "This individual is too young to be entered as a Senior.")
+                }
+            default:
+                break
             }
-            
         default:
             break
         }
