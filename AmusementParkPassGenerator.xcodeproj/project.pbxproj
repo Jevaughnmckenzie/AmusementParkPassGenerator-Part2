@@ -137,6 +137,7 @@
 		3A8AADC71DF9B85E00A2B931 /* SingleViewAppSwiftTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A8A120CF1E98934300804A28 /* Sounds */,
 				A86E04141E943992003A21FB /* FaceImageAsset.png */,
 				3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */,
 				3A8AADCC1DF9B85E00A2B931 /* Main.storyboard */,
@@ -153,7 +154,6 @@
 				3A8AADD11DF9B85E00A2B931 /* LaunchScreen.storyboard */,
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
 				A8409A351E7843080019DEAB /* EnrantInfo.swift */,
-				A8A120CF1E98934300804A28 /* Sounds */,
 				A8409A391E78437E0019DEAB /* InfoError.swift */,
 				A835F2171E8E9BA500E3A659 /* Entrant.swift */,
 				A835F2151E8E9B1100E3A659 /* AccessPermission.swift */,

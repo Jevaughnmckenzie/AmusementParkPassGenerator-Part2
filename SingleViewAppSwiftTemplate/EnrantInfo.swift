@@ -42,6 +42,13 @@ struct EntrantInfo {
         self.state = state
         self.zipcode = zipcode
         
+        var stringRange: Range<String.CharacterView.Index>
+        
+//        let birthdayHolder = birthday
+//        birthday.
+//        let birthMonth = Int(birthday?.characters.prefix(upTo: 3))
+//        let birthDay = birthdayHolder?.characters[]
+        
         birthdayFormated.dateFormat = "MM/dd/yyyy"
         
         if birthday != nil {
