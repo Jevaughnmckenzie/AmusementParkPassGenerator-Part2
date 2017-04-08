@@ -11,8 +11,22 @@ import UIKit
 struct ManagerNavigation {
     
     let managerNavStackview = UIStackView()
+    let manager = Entrant.ManagerType.self
     
     init() {
+        
+        let seniorButton = entrantButton(withTitle: manager.senior.rawValue)
+        let generalButton = entrantButton(withTitle: manager.general.rawValue)
+        let shiftButton = entrantButton(withTitle: manager.shift.rawValue)
+        
+        managerNavStackview.addArrangedSubview(seniorButton)
+        managerNavStackview.addArrangedSubview(generalButton)
+        managerNavStackview.addArrangedSubview(shiftButton)
+        
+        managerNavStackview.axis = .horizontal
+        managerNavStackview.alignment = .fill
+        managerNavStackview.distribution = .fillEqually
+        managerNavStackview.spacing = 0
     }
     
     func entrantButton(withTitle title: String) -> UIButton {

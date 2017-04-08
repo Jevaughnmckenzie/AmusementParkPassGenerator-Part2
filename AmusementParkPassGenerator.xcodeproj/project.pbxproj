@@ -24,7 +24,6 @@
 		A8409A341E7842F00019DEAB /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8409A331E7842F00019DEAB /* Pass.swift */; };
 		A8409A361E7843080019DEAB /* EnrantInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8409A351E7843080019DEAB /* EnrantInfo.swift */; };
 		A8409A3A1E78437E0019DEAB /* InfoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8409A391E78437E0019DEAB /* InfoError.swift */; };
-		A8409A3C1E7845AF0019DEAB /* ProgramiticUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8409A3B1E7845AF0019DEAB /* ProgramiticUIViewController.swift */; };
 		A86E04151E943992003A21FB /* FaceImageAsset.png in Resources */ = {isa = PBXBuildFile; fileRef = A86E04141E943992003A21FB /* FaceImageAsset.png */; };
 		A86E04171E94583A003A21FB /* PassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86E04161E945839003A21FB /* PassController.swift */; };
 		A86E04191E9459A4003A21FB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86E04181E9459A4003A21FB /* MainViewController.swift */; };
@@ -78,7 +77,6 @@
 		A8409A331E7842F00019DEAB /* Pass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
 		A8409A351E7843080019DEAB /* EnrantInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrantInfo.swift; sourceTree = "<group>"; };
 		A8409A391E78437E0019DEAB /* InfoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoError.swift; sourceTree = "<group>"; };
-		A8409A3B1E7845AF0019DEAB /* ProgramiticUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramiticUIViewController.swift; sourceTree = "<group>"; };
 		A86E04141E943992003A21FB /* FaceImageAsset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FaceImageAsset.png; sourceTree = "<group>"; };
 		A86E04161E945839003A21FB /* PassController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassController.swift; sourceTree = "<group>"; };
 		A86E04181E9459A4003A21FB /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */,
 				3A8AADCC1DF9B85E00A2B931 /* Main.storyboard */,
 				A86E04181E9459A4003A21FB /* MainViewController.swift */,
-				A8409A3B1E7845AF0019DEAB /* ProgramiticUIViewController.swift */,
 				A86E04161E945839003A21FB /* PassController.swift */,
 				A835F2251E8EAAC700E3A659 /* TestCases.swift */,
 				A835F2231E8EA6BC00E3A659 /* TopNavigation.swift */,
@@ -348,7 +345,6 @@
 				A86E04171E94583A003A21FB /* PassController.swift in Sources */,
 				A835F2221E8EA1C500E3A659 /* VendorStallKiosk.swift in Sources */,
 				A835F2261E8EAAC700E3A659 /* TestCases.swift in Sources */,
-				A8409A3C1E7845AF0019DEAB /* ProgramiticUIViewController.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
 				A86EC2F41E8EC2C8003B5B57 /* ManagerNavigation.swift in Sources */,
 				A835F2181E8E9BA500E3A659 /* Entrant.swift in Sources */,

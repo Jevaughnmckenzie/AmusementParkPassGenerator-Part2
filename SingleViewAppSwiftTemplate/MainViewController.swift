@@ -143,6 +143,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     func loadTextFieldsDisabled(_ textFields: [UITextField]) {
         for textField in textFields {
+            textField.text = ""
             textField.backgroundColor = UIColor.lightGray
             textField.isUserInteractionEnabled = false
         }
@@ -172,7 +173,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             case "Child", "Adult", "VIP", "Senior":
                 enableTextFields([dobTextField,firstNameTextField, lastNameTextField])
                 disableTextFields([ssnTextField,projectNumTextField,companyTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
-            case "Food Service", "Ride Service", "Maintenance":
+            case "Food Service", "Ride Service", "Maintenance", "Head", "Shift", "General":
                 enableTextFields([dobTextField,firstNameTextField, lastNameTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField])
                 disableTextFields([ssnTextField, projectNumTextField,companyTextField])
             case "Contract" :

@@ -35,6 +35,12 @@ enum Entrant {
         }
     }
     
+    enum ManagerType: String {
+        case shift = "Shift"
+        case general = "General"
+        case senior = "Head"
+    }
+    
     enum VendorType: String {
         case acme = "Acme"
         case orkin = "Orkin"
