@@ -9,26 +9,30 @@
 import Foundation
 
 protocol Swipeable {
-    func swipeFunction(pass: Pass) -> Bool// depending on the kiosk, it returns a string after determining privileges
-    func swipe(pass: Pass) -> Bool // prevents a swipe from occuring twice when called on a particular instance
-    func printBirthdayMessage(pass: Pass)
+//    func swipeFunction(pass: Pass) -> Bool// depending on the kiosk, it returns a string after determining privileges
+//    func swipe(pass: Pass) -> Bool // prevents a swipe from occuring twice when called on a particular instance
+//    func printBirthdayMessage(pass: Pass)
 }
 
 
 // This is the main class of kiosk that is never actually called.
 // The subclasses are always ustilized instead
 class Kiosk: Swipeable {
-    
+    let pass: Pass
     var timeStampHistory = [String]()
     let calendar = Calendar.current
     
     
-    func swipeFunction(pass: Pass) -> Bool { // preforms all the actual acts involved in checking permissions
-        print("Please pick a more spesific kiosk.")
-        return false
+    init(pass: Pass) {
+        self.pass = pass
     }
     
-    func swipe(pass: Pass) -> Bool { // The swipe function preforms a "double swipe check" before calling the swipe function
+//    func swipeFunction() -> Bool { // preforms all the actual acts involved in checking permissions
+//        print("Please pick a more spesific kiosk.")
+//        return false
+//    }
+    
+    func swipe<T>(forPermission: T, with function: (T) -> Bool) -> Bool { // The swipe function preforms a "double swipe check" before calling the swipe function
         let timestampFormatter = DateFormatter()
         let swipeTimeStamp = Date()
         
@@ -43,7 +47,7 @@ class Kiosk: Swipeable {
         
         // Does not check for doubleswipe if there is not two timestamps in the timeStampHistory array
         if timeStampHistory.count < 2 {
-           return swipeFunction(pass: pass)
+            return function(forPermission)
         } else{
             
             let previousTimeStampIndex = timeStampHistory.count - 2
@@ -56,7 +60,7 @@ class Kiosk: Swipeable {
                 let lastSwipe = timestampFormatter.date(from: previousTimeStamp) {
                 let nextAbilityToSwipe = lastSwipe.addingTimeInterval(5)
                 if currentSwipe > nextAbilityToSwipe {
-                  return  swipeFunction(pass: pass)
+                  return function(forPermission)
                 } else {
                     print("Please try again later")
                 }

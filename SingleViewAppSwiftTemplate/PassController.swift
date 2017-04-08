@@ -12,7 +12,7 @@ class PassController: UIViewController {
 
     var pass: Pass!
 //    weak var rideAccessKiosk: RideAccessKiosk!
-    var areaAccessKiosk = AreaAccessKiosk(for: .office)
+    var areaAccessKiosk: AreaAccessKiosk!
 //    weak var vendorStallKiosk: VendorStallKiosk!
     
     @IBOutlet weak var entrantNameLabel: UILabel!
@@ -27,7 +27,7 @@ class PassController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        areaAccessKiosk = AreaAccessKiosk(pass: pass)
 //        rideAccessKiosk = RideAccessKiosk(pass: pass)
 //        areaAccessKiosk = AreaAccessKiosk(for: .office)
 //        vendorStallKiosk = VendorStallKiosk(pass: pass)
@@ -165,29 +165,14 @@ class PassController: UIViewController {
     }
 
     @IBAction func checkOfficePermission(_ sender: UIButton) {
-//        print("Joy is annoying")
-//        print("\(pass.entrant)")
-//        print("\(pass.getAccessPrivileges())")
         
-        if  areaAccessKiosk.swipe(pass: pass) {
-            print("yayyyyyy")
+        if  areaAccessKiosk.swipe(forPermission: .amusement, with: areaAccessKiosk.swipeFunction) {
+            testResultsView.backgroundColor = UIColor.green
+            testResultsMessage.text = "Access Granted"
+        } else {
+            testResultsView.backgroundColor = UIColor.red
+            testResultsMessage.text = "Access Denied"
         }
-        //{
-//            testResultsView.backgroundColor = UIColor.green
-//            testResultsMessage.text = "Access Granted"
-//        } else {
-//            testResultsView.backgroundColor = UIColor.red
-//            testResultsMessage.text = "Access Denied"
-//        }
-        
-        
-//        if areaAccessKiosk.swipe(authorizing: .areaAccess(.office)) {
-//            testResultsView.backgroundColor = UIColor.green
-//            testResultsMessage.text = "Access Granted"
-//        } else {
-//            testResultsView.backgroundColor = UIColor.red
-//            testResultsMessage.text = "Access Denied"
-//        }
     }
     
     

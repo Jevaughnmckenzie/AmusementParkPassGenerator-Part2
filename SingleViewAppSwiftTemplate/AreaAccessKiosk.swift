@@ -8,20 +8,16 @@
 
 class AreaAccessKiosk: Kiosk {
     let description = "AreaAccessKiosk"
-    var areaBeingAuthorized: AccessPermission.AreaAccess
     
-    init(for areaBeingAuthorized: AccessPermission.AreaAccess) {
-        self.areaBeingAuthorized = areaBeingAuthorized
-    }
     
-    override func swipeFunction(pass: Pass) -> Bool {
-        
+    func swipeFunction(authorized: AccessPermission.AreaAccess) -> Bool {
+        printBirthdayMessage(pass: pass)
         var catagoricalPermissions = 0 // Used to relay whether or not an entrant has no permissions in a situation
 
             for permission in pass.getAccessPrivileges() {
                 switch permission {
-                case .areaAccess(areaBeingAuthorized) :
-                    switch areaBeingAuthorized {
+                case .areaAccess(authorized) :
+                    switch  authorized {
                     case .amusement, .kitchen, .maintenance, .office, .rideControl:
                        return true
                         catagoricalPermissions += 1
@@ -34,7 +30,7 @@ class AreaAccessKiosk: Kiosk {
             if catagoricalPermissions == 0 {
                 print("Access Denied")
             }
-            printBirthdayMessage(pass: pass)
+        
         return false
     }
 }
