@@ -11,9 +11,9 @@ import UIKit
 class PassController: UIViewController {
 
     var pass: Pass!
-//    weak var rideAccessKiosk: RideAccessKiosk!
+    var rideAccessKiosk: RideAccessKiosk!
     var areaAccessKiosk: AreaAccessKiosk!
-//    weak var vendorStallKiosk: VendorStallKiosk!
+    var vendorStallKiosk: VendorStallKiosk!
     
     @IBOutlet weak var entrantNameLabel: UILabel!
     @IBOutlet weak var entrantTypeLabel: UILabel!
@@ -25,67 +25,17 @@ class PassController: UIViewController {
     @IBOutlet weak var testResultsView: UIView!
     @IBOutlet weak var testResultsMessage: UILabel!
     
+    weak var playSoundEffects = Buzzer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         areaAccessKiosk = AreaAccessKiosk(pass: pass)
-//        rideAccessKiosk = RideAccessKiosk(pass: pass)
-//        areaAccessKiosk = AreaAccessKiosk(for: .office)
-//        vendorStallKiosk = VendorStallKiosk(pass: pass)
+        rideAccessKiosk = RideAccessKiosk(pass: pass)
+        vendorStallKiosk = VendorStallKiosk(pass: pass)
         
-//        loadPassInfo()
+        loadPassInfo()
     }
 
-    
-//    @IBAction func checkAreaAccessPermissions(_ sender: UIButton) {
-//        
-//        guard let button = sender.currentTitle else { return }
-//        switch button {
-//        case "Ride Control":
-//            areaAccessKiosk.swipe(authorizing: .areaAccess(.rideControl))
-//        case "Kitchen" :
-//            areaAccessKiosk.swipe(authorizing: .areaAccess(.kitchen))
-//        case "Maintenance" :
-//            areaAccessKiosk.swipe(authorizing: .areaAccess(.maintenance))
-//        case "Office" :
-//            areaAccessKiosk.swipe(authorizing: .areaAccess(.office))
-//        case "Amusement" :
-//            areaAccessKiosk.swipe(authorizing: .areaAccess(.amusement))
-//            
-//        default:
-//            //FIXME: put alert or something
-//            return
-//        }
-//        
-//    }
-//    
-//    @IBAction func checkRidePermissions(_ sender: UIButton) {
-//        
-//        guard let button = sender.currentTitle else { return }
-//        switch button {
-//        case "Rides":
-//            rideAccessKiosk.swipe(authorizing: .rideAccess(.allRides))
-//            rideAccessKiosk.swipe(authorizing: .rideAccess(.noRides))
-//            rideAccessKiosk.swipe(authorizing: .ridePriority(.skipPrivilege))
-//            rideAccessKiosk.swipe(authorizing: .ridePriority(.standard))
-//        default:
-//            return
-//        }
-//        
-//    }
-//   
-//    @IBAction func checkDiscountPermissions(_ sender: UIButton) {
-//        
-//        guard let button = sender.currentTitle else { return }
-//        switch button {
-//        case "Food Discount":
-//            vendorStallKiosk.swipe(authorizing: .discountAccess(.food, 5))
-//            //FIXME: Add remaining code
-//        default:
-//            return
-//        }
-//        
-//    }
-    
     func loadPassInfo() {
         // Name
         if let firstName =  pass.personalInfo.firstName, let lastName = pass.personalInfo.lastName {
@@ -95,7 +45,7 @@ class PassController: UIViewController {
                 entrantNameLabel.text = "Guest"
             }
         }
-        // Pass Type
+        //MARK: Pass Type
         let entrant = pass.entrant
         switch entrant {
         case .guest(let guestType):
@@ -136,7 +86,8 @@ class PassController: UIViewController {
                 entrantTypeLabel.text = "NW Electrical"
             }
         }
-        // Ride access
+        
+        // MARK: Ride access
         switch entrant {
         case .employee(.contract), .vendor:
             rideAccessPermissionLabel.text = "No Rides"
@@ -144,7 +95,7 @@ class PassController: UIViewController {
             rideAccessPermissionLabel.text = "Unlimited Rides"
 
         }
-        // Food and Merch. Discounts
+        // MARK: Food and Merch. Discounts
         switch entrant {
         case .guest(.regularGuest), .guest(.child), .employee(.contract), .vendor:
             foodDiscountLabel.text = "No Food Discount"
@@ -163,18 +114,81 @@ class PassController: UIViewController {
             merchendiseDiscountLabel.text = "25% Merchendise Discount"
         }
     }
-
-    @IBAction func checkOfficePermission(_ sender: UIButton) {
-        
-        if  areaAccessKiosk.swipe(forPermission: .amusement, with: areaAccessKiosk.swipeFunction) {
+    // MARK: Access Testing functions
+    func areaAccessTestingFor(_ area: AccessPermission.AreaAccess) {
+        if  areaAccessKiosk.swipe(forPermission: area, with: areaAccessKiosk.swipeFunction) {
             testResultsView.backgroundColor = UIColor.green
             testResultsMessage.text = "Access Granted"
+            playSoundEffects?.playSound(for: self)
         } else {
             testResultsView.backgroundColor = UIColor.red
+            playSoundEffects?.playSound(for: self)
             testResultsMessage.text = "Access Denied"
         }
     }
     
+    func rideAccessTesting() {
+        if  rideAccessKiosk.swipe(forPermission: .allRides, with: rideAccessKiosk.swipeFunction) {
+            testResultsView.backgroundColor = UIColor.green
+            playSoundEffects?.playSound(for: self)
+            testResultsMessage.text = "Access Granted"
+            if rideAccessKiosk.swipe(forPermission: .standard, with: rideAccessKiosk.swipeFunction) {
+                testResultsMessage.text = testResultsMessage.text! + "\nStandard Rider"
+            } else if rideAccessKiosk.swipe(forPermission: .skipPrivilege, with: rideAccessKiosk.swipeFunction) {
+                testResultsMessage.text = testResultsMessage.text! + "\nExpress Rider"
+        } else {
+            testResultsView.backgroundColor = UIColor.red
+                playSoundEffects?.playSound(for: self)
+            testResultsMessage.text = "Access Denied"
+        }
+    }
     
+}
+    
+    func discountAccessTestingFor(_ discount: AccessPermission.Discount) {
+        if vendorStallKiosk.swipe(forPermission: discount, with: vendorStallKiosk.swipeFunction) {
+            testResultsMessage.text = "Discount Granted. See pass for details."
+            testResultsView.backgroundColor = UIColor.green
+            playSoundEffects?.playSound(for: self)
+        } else {
+            testResultsView.backgroundColor = UIColor.red
+            testResultsMessage.text = "Discount Denied."
+            playSoundEffects?.playSound(for: self)
+        }
+    }
+    
+    @IBAction func checkOfficePermission(_ sender: UIButton) {
+        guard let buttonTitle = sender.currentTitle else {
+            fatalError("Access Testing button without title.")
+        }
+        testResultsMessage.text = ""
+        switch buttonTitle{
+        case "Office":
+            areaAccessTestingFor(.office)
+        case "Kitchen":
+            areaAccessTestingFor(.kitchen)
+        case "Maintenance":
+            areaAccessTestingFor(.maintenance)
+        case "Ride Control": areaAccessTestingFor(.rideControl)
+        case "Amusement": areaAccessTestingFor(.amusement)
+        case "Rides":
+            rideAccessTesting()
+        case "Food Discount":
+            discountAccessTestingFor(.food)
+        case "Merch. Discount":
+            discountAccessTestingFor(.merchandise)
+        default:
+            fatalError("Invalid Button")
+        }
+        
+    }
 
+    func clearPass() {
+        testResultsMessage.text = "Test Results"
+        testResultsView.backgroundColor = UIColor.white
+    }
+    
+    @IBAction func createNewPass() {
+        dismiss(animated: true, completion: clearPass)
+    }
 }

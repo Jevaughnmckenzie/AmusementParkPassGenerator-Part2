@@ -500,6 +500,9 @@
                                 <state key="normal" title="Kitchen">
                                     <color key="titleColor" red="0.15931858091783838" green="0.5433359565883249" blue="0.13358586495680247" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="tGb-TW-rOK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5A-fZ-KRs">
                                 <rect key="frame" x="227" y="944" width="314" height="60"/>
@@ -511,6 +514,9 @@
                                 <state key="normal" title="Create New Pass">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createNewPass" destination="TvN-Xk-18Y" eventType="touchUpInside" id="cek-58-lBy"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LD9-1m-1Nm">
                                 <rect key="frame" x="50" y="682" width="660" height="234"/>
@@ -535,6 +541,9 @@
                                 <state key="normal" title="Create New Pass">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createNewPass" destination="TvN-Xk-18Y" eventType="touchUpInside" id="f4i-da-Ngz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zl7-y4-S8o">
                                 <rect key="frame" x="560" y="523" width="150" height="60"/>
@@ -547,6 +556,9 @@
                                 <state key="normal" title="Ride Control">
                                     <color key="titleColor" red="0.15931858091783838" green="0.5433359565883249" blue="0.13358586495680247" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="yIy-GB-Zx2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Lu-D6-Zqp">
                                 <rect key="frame" x="50.5" y="607" width="150" height="60"/>
@@ -559,6 +571,9 @@
                                 <state key="normal" title="Rides">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="8gE-Qz-a9r"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNX-hK-AaJ">
                                 <rect key="frame" x="221" y="607" width="150" height="60"/>
@@ -571,6 +586,9 @@
                                 <state key="normal" title="Food Discount">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="E2g-uE-hZ2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-8A-GlP">
                                 <rect key="frame" x="391" y="607" width="150" height="60"/>
@@ -583,6 +601,9 @@
                                 <state key="normal" title="Merch. Discount">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="qaz-VO-a1q"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odO-dz-z38">
                                 <rect key="frame" x="390.5" y="523" width="150.5" height="60"/>
@@ -595,6 +616,9 @@
                                 <state key="normal" title="Maintenance">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="00K-aJ-Nk4"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKX-hy-A3V">
                                 <rect key="frame" x="560" y="607" width="150" height="60"/>
@@ -607,6 +631,9 @@
                                 <state key="normal" title="Amusement">
                                     <color key="titleColor" red="0.15931858090000001" green="0.5433359566" blue="0.133585865" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="M45-qI-mRn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EN-k4-HQn">
                                 <rect key="frame" x="50.5" y="523" width="150.5" height="60"/>
@@ -620,7 +647,7 @@
                                     <color key="titleColor" red="0.15931858091783838" green="0.5433359565883249" blue="0.13358586495680247" alpha="0.68000000000000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="brI-Rz-p3u"/>
+                                    <action selector="checkOfficePermission:" destination="TvN-Xk-18Y" eventType="touchUpInside" id="dHl-gS-1yM"/>
                                 </connections>
                             </button>
                         </subviews>

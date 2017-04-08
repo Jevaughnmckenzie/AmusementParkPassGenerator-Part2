@@ -32,6 +32,9 @@
 		A86EC2F21E8EC14E003B5B57 /* EmployeeNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86EC2F11E8EC14E003B5B57 /* EmployeeNavigation.swift */; };
 		A86EC2F41E8EC2C8003B5B57 /* ManagerNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86EC2F31E8EC2C8003B5B57 /* ManagerNavigation.swift */; };
 		A86EC2F61E8EC2DE003B5B57 /* VendorNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86EC2F51E8EC2DE003B5B57 /* VendorNavigation.swift */; };
+		A8A120D21E98936300804A28 /* AccessDenied.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8A120D01E98936300804A28 /* AccessDenied.wav */; };
+		A8A120D31E98936300804A28 /* AccessGranted.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8A120D11E98936300804A28 /* AccessGranted.wav */; };
+		A8A120D51E98939800804A28 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A120D41E98939800804A28 /* Audio.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		A86EC2F11E8EC14E003B5B57 /* EmployeeNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeNavigation.swift; sourceTree = "<group>"; };
 		A86EC2F31E8EC2C8003B5B57 /* ManagerNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerNavigation.swift; sourceTree = "<group>"; };
 		A86EC2F51E8EC2DE003B5B57 /* VendorNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorNavigation.swift; sourceTree = "<group>"; };
+		A8A120D01E98936300804A28 /* AccessDenied.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessDenied.wav; sourceTree = "<group>"; };
+		A8A120D11E98936300804A28 /* AccessGranted.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = AccessGranted.wav; sourceTree = "<group>"; };
+		A8A120D41E98939800804A28 /* Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Audio.swift; path = ../Audio.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,7 @@
 				A835F2251E8EAAC700E3A659 /* TestCases.swift */,
 				A835F2231E8EA6BC00E3A659 /* TopNavigation.swift */,
 				A86EC2EF1E8EBFEA003B5B57 /* GuestNavigation.swift */,
+				A8A120D41E98939800804A28 /* Audio.swift */,
 				A86EC2F11E8EC14E003B5B57 /* EmployeeNavigation.swift */,
 				A86EC2F31E8EC2C8003B5B57 /* ManagerNavigation.swift */,
 				A86EC2F51E8EC2DE003B5B57 /* VendorNavigation.swift */,
@@ -149,6 +156,7 @@
 				3A8AADD11DF9B85E00A2B931 /* LaunchScreen.storyboard */,
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
 				A8409A351E7843080019DEAB /* EnrantInfo.swift */,
+				A8A120CF1E98934300804A28 /* Sounds */,
 				A8409A391E78437E0019DEAB /* InfoError.swift */,
 				A835F2171E8E9BA500E3A659 /* Entrant.swift */,
 				A835F2151E8E9B1100E3A659 /* AccessPermission.swift */,
@@ -177,6 +185,15 @@
 				3A8AADEA1DF9B85E00A2B931 /* Info.plist */,
 			);
 			path = SingleViewAppSwiftTemplateUITests;
+			sourceTree = "<group>";
+		};
+		A8A120CF1E98934300804A28 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				A8A120D01E98936300804A28 /* AccessDenied.wav */,
+				A8A120D11E98936300804A28 /* AccessGranted.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +305,9 @@
 			files = (
 				3A8AADD31DF9B85E00A2B931 /* LaunchScreen.storyboard in Resources */,
 				3A8AADD01DF9B85E00A2B931 /* Assets.xcassets in Resources */,
+				A8A120D31E98936300804A28 /* AccessGranted.wav in Resources */,
 				3A8AADCE1DF9B85E00A2B931 /* Main.storyboard in Resources */,
+				A8A120D21E98936300804A28 /* AccessDenied.wav in Resources */,
 				A86E04151E943992003A21FB /* FaceImageAsset.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +337,7 @@
 				A8409A361E7843080019DEAB /* EnrantInfo.swift in Sources */,
 				A8409A3A1E78437E0019DEAB /* InfoError.swift in Sources */,
 				A86EC2F61E8EC2DE003B5B57 /* VendorNavigation.swift in Sources */,
+				A8A120D51E98939800804A28 /* Audio.swift in Sources */,
 				A86EC2F01E8EBFEA003B5B57 /* GuestNavigation.swift in Sources */,
 				A8409A341E7842F00019DEAB /* Pass.swift in Sources */,
 				A835F21E1E8E9F6C00E3A659 /* AreaAccessKiosk.swift in Sources */,

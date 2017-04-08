@@ -37,14 +37,14 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     var currentEntrantType: Entrant?
 
-    
+    var allTextFields: [UITextField]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         
-        let allTextFields: [UITextField] = [dobTextField,ssnTextField,projectNumTextField,firstNameTextField,lastNameTextField,companyTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField]
+         allTextFields = [dobTextField,ssnTextField,projectNumTextField,firstNameTextField,lastNameTextField,companyTextField,streetAddressTextField,cityTextField,stateTextField,zipcodeTextField]
         
         loadTextFieldsDisabled(allTextFields)
         createTextFieldDelegatesFor(allTextFields)
@@ -57,28 +57,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillLayoutSubviews() {
-//        setupTopLevelNavStackView()
         addSecondLevelNavStackViews()
     }
-    
-    // MARK: - Navigation
-
-     
-    
-    
-   
-//    func setupTopLevelNavStackView() {
-//        
-//        entrantButtons.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        
-//        NSLayoutConstraint.activate([
-//            entrantButtons.topAnchor.constraint(equalTo: topNav.topAnchor),
-//            entrantButtons.leadingAnchor.constraint(equalTo: topNav.leadingAnchor),
-//            entrantButtons.trailingAnchor.constraint(equalTo: topNav.trailingAnchor),
-//            entrantButtons.bottomAnchor.constraint(equalTo: topNav.bottomAnchor)
-//            ])
-//    }
     
     
     func addSecondLevelNavStackViews() {
@@ -86,8 +66,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         subNav.addSubview(employeeNav.employeeNavStackView)
         subNav.addSubview(managerNav.managerNavStackview)
         subNav.addSubview(vendorNav.vendorNavStackview)
-        
-        //FIXME: Repetative code
         
         guestNav.guestNavStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(createSubNavConstraintsFor(guestNav.guestNavStackView))
@@ -172,7 +150,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     func disableTextFields(_ textFields: [UITextField]) {
         for textField in textFields {
-//            textField.text = ""
+            textField.text = ""
             textField.isUserInteractionEnabled = false
             textField.backgroundColor = UIColor.lightGray
         }
@@ -180,7 +158,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     func enableTextFields(_ textFields: [UITextField]) {
         for textField in textFields {
-//            textField.text = ""
+            textField.text = ""
             textField.isUserInteractionEnabled = true
             textField.backgroundColor = UIColor.white
         }
@@ -333,7 +311,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             do {
                 guard let passController = segue.destination as? PassController else { return }
                 passController.pass = try createPass()
-                
+                loadTextFieldsDisabled(allTextFields)
             } catch InfoError.missingInformation(let object, let hint){
                 let alertController = UIAlertController(title: "Missing Information", message: "Error in \(object): \(hint)", preferredStyle: .alert)
                 

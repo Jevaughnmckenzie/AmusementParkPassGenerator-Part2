@@ -18,16 +18,12 @@ class VendorStallKiosk: Kiosk {
             case .discountAccess(authorization, let discountAmount) :
                 switch authorization {
                 case .food, .merchandise:
-                    print("Please provide discount of \(discountAmount).")
+                    return true
                     catagoricalPermissions += 1
                 }
             default:
                 continue
             }
-        }
-        
-        if catagoricalPermissions == 0 {
-            print("No discount")
         }
         
         return false
