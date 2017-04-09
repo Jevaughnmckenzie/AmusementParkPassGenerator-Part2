@@ -69,18 +69,7 @@ class Kiosk: Swipeable {
         return false
     }
     
-    func printBirthdayMessage(pass: Pass) -> String {
-        if let  birthdayDate = pass.personalInfo.birthdayDate {
-            let birthdayDateComponents = calendar.dateComponents([.year, .month, .day], from: birthdayDate)
-            let currentDayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
-            
-            if  birthdayDateComponents.month == currentDayComponents.month
-                && birthdayDateComponents.day == currentDayComponents.day {
-                return "Happy Birthday!"
-            }
-        }
-        return ""
-    }
+    
 }
 
 

@@ -9,7 +9,7 @@
 import UIKit
 
 class PassController: UIViewController {
-
+    let calendar = Calendar.current
     var pass: Pass!
     var rideAccessKiosk: RideAccessKiosk!
     var areaAccessKiosk: AreaAccessKiosk!
@@ -34,6 +34,19 @@ class PassController: UIViewController {
         vendorStallKiosk = VendorStallKiosk(pass: pass)
         
         loadPassInfo()
+    }
+    
+    func printBirthdayMessage() -> String {
+        if let  birthdayDate = pass.personalInfo.birthdayDate {
+            let birthdayDateComponents = calendar.dateComponents([.year, .month, .day], from: birthdayDate)
+            let currentDayComponents = calendar.dateComponents([.year, .month, .day], from: Date())
+            
+            if  birthdayDateComponents.month == currentDayComponents.month
+                && birthdayDateComponents.day == currentDayComponents.day {
+                return "\nHappy Birthday!"
+            }
+        }
+        return ""
     }
 
     func loadPassInfo() {
@@ -125,6 +138,7 @@ class PassController: UIViewController {
             playSoundEffects?.playSound(for: self)
             testResultsMessage.text = "Access Denied"
         }
+        testResultsMessage.text = testResultsMessage.text! + " " + printBirthdayMessage()
     }
     
     func rideAccessTesting() {
@@ -141,9 +155,10 @@ class PassController: UIViewController {
                 playSoundEffects?.playSound(for: self)
             testResultsMessage.text = "Access Denied"
         }
-    }
+            testResultsMessage.text = testResultsMessage.text! + " " + printBirthdayMessage()
+        }
     
-}
+    }
     
     func discountAccessTestingFor(_ discount: AccessPermission.Discount) {
         if vendorStallKiosk.swipe(forPermission: discount, with: vendorStallKiosk.swipeFunction) {
@@ -155,6 +170,7 @@ class PassController: UIViewController {
             testResultsMessage.text = "Discount Denied."
             playSoundEffects?.playSound(for: self)
         }
+        testResultsMessage.text = testResultsMessage.text! + " " + printBirthdayMessage()
     }
     
     @IBAction func checkOfficePermission(_ sender: UIButton) {

@@ -11,7 +11,7 @@ class VendorStallKiosk: Kiosk {
     let description = "VendorStallKiosk"
     
     func swipeFunction(authorizing authorization: AccessPermission.Discount) -> Bool {
-        printBirthdayMessage(pass: pass)
+//        printBirthdayMessage(pass: pass)
         for permission in pass.getAccessPrivileges() {
             switch permission {
             case .discountAccess(authorization, let discountAmount) :

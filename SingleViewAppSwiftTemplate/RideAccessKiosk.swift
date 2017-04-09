@@ -11,7 +11,7 @@ class RideAccessKiosk: Kiosk {
     let description = "RideAccessKiosk"
     
     func swipeFunction(authorizing authorization: AccessPermission.RideAccess) -> Bool {
-        printBirthdayMessage(pass: pass)
+//        printBirthdayMessage(pass: pass)
         for permission in pass.getAccessPrivileges() {
             switch permission {
             case .rideAccess(authorization) :

@@ -11,7 +11,7 @@ class AreaAccessKiosk: Kiosk {
     
     
     func swipeFunction(authorized: AccessPermission.AreaAccess) -> Bool {
-        printBirthdayMessage(pass: pass)
+//        printBirthdayMessage(pass: pass)
             for permission in pass.getAccessPrivileges() {
                 switch permission {
                 case .areaAccess(authorized) :
